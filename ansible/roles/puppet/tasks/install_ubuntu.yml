@@ -1,0 +1,11 @@
+- name: Instalando o repositorio Puppet - Ubuntu
+  apt:
+    deb: /tmp/puppet6-release-bionic.deb
+  when: ansible_os_family == "Debian"
+
+- name: Instalando o pacote Puppet Agent - Ubuntu
+  apt:
+    name: puppet-agent
+    update_cache: yes
+    state: present
+  when: ansible_os_family == "Debian" 

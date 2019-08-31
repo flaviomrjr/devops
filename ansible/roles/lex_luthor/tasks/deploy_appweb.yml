@@ -1,0 +1,19 @@
+- name: Web App
+  template: #Vai buscar o arquivo index.html dentro da pasta template
+    src: index.html
+    dest: /var/www/html/index.html
+
+- name: Baixar uma Imagem
+  get_url:
+    url: https://miro.medium.com/max/700/1*BnUVkHkaYwHubm_2I9e0zw.jpeg 
+    dest: /var/www/html/imagem.jpeg
+
+- name: Restart Apache/HTTPD
+  systemd:
+    name: "{{ item.programa }}"
+    state: restarted
+  when: ansible_os_family == item.familia
+  loop:
+  - { programa: "apache2", familia: "Debian" }
+  - { programa: "httpd", familia: "RedHat" }
+

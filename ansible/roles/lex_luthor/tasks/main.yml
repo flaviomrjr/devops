@@ -1,0 +1,6 @@
+---
+# tasks file for lex_luthor
+- include: prerequisitos.yml
+- include: iniciando_banco.yml
+- include: prov_database.yml
+- include: deploy_appweb.yml

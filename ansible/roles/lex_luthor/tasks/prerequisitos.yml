@@ -1,0 +1,12 @@
+- name: Instalando Banco e Web - Ubuntu
+  apt:
+    name: ['mysql-client','mysql-server','python-pymysql','apache2']
+    update_cache: yes
+    state: present #versao do pacote or latest 
+  when: ansible_os_family == 'Debian'
+
+- name: Instalando Banco e Web - Red Hat
+  yum:
+    name: ['mariadb','mariadb-server','MySQL-python','httpd']
+    state: present
+  when: ansible_os_family == 'RedHat'

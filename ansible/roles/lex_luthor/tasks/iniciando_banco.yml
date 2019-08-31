@@ -1,0 +1,9 @@
+- name: Iniciando MySQL
+  systemd: name=mysql state=restarted
+  when: ansible_os_family == 'Debian'
+
+- name: Iniciando MySQL
+  systemd:
+    name: mariadb
+    state: restarted
+  when: ansible_os_family == 'RedHat'

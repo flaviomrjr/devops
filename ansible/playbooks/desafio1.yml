@@ -1,0 +1,64 @@
+---
+- name: Playbook Desafio1
+  hosts: all
+  tasks:
+  - name: Para NGINX
+    systemd:
+      name: nginx
+      state: stopped
+    ignore_errors: True
+
+  - name: Removendo Pacotes NGINX
+    apt:
+      name: nginx
+      update_cache: yes
+      state: absent
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Removendo Pacotes NGINX - Like Red hat
+    yum:
+      name: nginx
+      state: absent
+    when: ansible_distribution == "CentOS"
+
+  - name: Instalando os Seguintes Pacotes
+    apt:
+      name: ['apache2','libapache2-mod-php7.2','php7.2']
+      update_cache: yes
+      state: present
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Instalando os Seguintes Pacote - Red hat
+    yum:
+      name: ['httpd','php']
+      state: present
+    when: ansible_distribution == "CentOS"
+
+  - name: Habilitando o modulo php
+    command: a2enmod php7.2
+    when: ansible_distribution == "Ubuntu"
+    
+  - name: Reiniciar HTTPD
+    systemd: 
+      name: httpd
+      state: restarted
+    when: ansible_distribution == "CentOS"
+
+  - name: Reiniciar Apache
+    systemd:
+      name: apache2
+      state: restarted
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Criar arquivos index.php
+    file:
+      path: /var/www/html/index.php
+      state: touch
+      mode: u+rwx,g+rwx,o+rwx
+
+  - name: Adicionar valor no arquivos index
+    blockinfile:
+      path: /var/www/html/index.php
+      state: present
+      block: |
+        <?php echo "Desafio Completo" ?>   
