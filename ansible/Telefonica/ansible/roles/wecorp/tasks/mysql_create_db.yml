@@ -1,0 +1,30 @@
+- name: Copiando arquivo DUMP da aplicação BASE
+  copy:
+    src: "{{ dbname }}.sql"
+    dest: /tmp
+
+- name: Criando Base de Dados
+  mysql_db:
+    name: "{{ dbname  }}"
+    state: present
+    encoding: utf8
+    login_unix_socket: "/var/run/mysqld/mysqld.sock"
+
+- name: Criando Usuario
+  mysql_user:
+    host: 'localhost'
+    name: appwecorp
+    password: 'Wecorp99@'
+    priv: '{{ dbname }}.*:ALL,GRANT'
+    state: present
+    login_unix_socket: "/var/run/mysqld/mysqld.sock"
+
+- name: Importar arquivo SQL para o banco criado
+  mysql_db:
+    name: "{{ dbname }}"
+    state: import
+    target: "/tmp/{{ dbname }}.sql"
+    login_unix_socket: "/var/run/mysqld/mysqld.sock"
+
+
+

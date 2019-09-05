@@ -1,0 +1,41 @@
+- name: Copiando aplicação Wecorp
+  copy:
+    src: "{{ dbname  }}.tar.bz2"
+    dest: "/tmp/{{ dbname }}.tar.bz2"
+
+- name: Descompacta a aplicação
+  unarchive: 
+    src: "/tmp/{{ dbname }}.tar.bz2"
+    dest: /servicios
+    remote_src: yes
+
+- name: Copiando arquivos portal-setup-wizard.properties
+  template:
+    src: portal-setup-wizard.properties.j2
+    dest: "/servicios/{{ dbname }}/portal-setup-wizard.properties"  
+
+- name: Copiando server.xml 
+  template:
+    src: server.xml.j2
+    dest: "/servicios/{{ dbname }}/tomcat-7.0.35/conf/server.xml"
+  
+- name: Copiando arquivo portal-ext.properties
+  template:
+    src: portal-ext.properties.j2
+    dest: "/servicios/{{ dbname }}/portal-ext.properties"
+
+- name: Copiando arquivo catalina.sh
+  copy:
+    src: catalina.sh
+    dest: "/servicios/{{ dbname }}/tomcat-7.0.35/bin"
+
+- name: Copiando arquivo setenv.sh
+  copy:
+    src: setenv.sh
+    dest: "/servicios/{{ dbname }}/tomcat-7.0.35/bin"
+
+- name: Iniciando aplicação 
+  command: "/servicios/{{ dbname }}/tomcat-7.0.35/bin/./startup.sh"
+
+- name: Limpando diretorio /TMP
+  command: rm -rf /tmp/*

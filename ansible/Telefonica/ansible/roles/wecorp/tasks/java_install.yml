@@ -1,0 +1,10 @@
+- name: Copiando java para o host remoto
+  copy:
+    src: java8.tar.gz
+    dest: /tmp/java8.tar.gz
+  
+- name: Descompactando java
+  unarchive: 
+    src: /tmp/java8.tar.gz
+    dest: /opt/
+    remote_src: yes
