@@ -1,0 +1,119 @@
+#
+# MySQL
+#
+jdbc.default.driverClassName=com.mysql.jdbc.Driver
+jdbc.default.url=jdbc:mysql://localhost/{{ dbname }}?useUnicode=true&characterEncoding=UTF-8&useFastDateParsing=false
+jdbc.default.username=appwecorp
+jdbc.default.password=Wecorp99@
+jdbc.default.numHelperThreads=10
+
+http.header.version.verbosity=partial
+
+com.liferay.portal.servlet.filters.themepreview.ThemePreviewFilter=true
+
+users.reminder.queries.enabled=false
+users.reminder.queries.custom.question.enabled=false
+
+layout.show.portlet.access.denied=false 
+
+redirect.url.security.mode=domain
+#redirect.url.domains.allowed=liferay61des.intranet.tls
+redirect.url.security.mode=ip
+redirect.url.domains.allowed=127.0.0.1
+
+user.country=ES
+company.default.locale=es_ES
+user.language=es
+
+#
+# Set this to true to enable tag suggestions.
+#
+company.security.strangers.verify=true
+
+#LPS-30940
+cdn_enabled=false
+
+# Set this to true to allow users to autocomplete the login form based on
+# their previously entered values.
+#
+company.security.login.form.autocomplete=false
+
+auto.login.hooks=com.liferay.portal.security.auth.ParameterAutoLogin
+
+# Evita fallo serveResource
+portlet.add.default.resource.check.enabled=true
+
+
+#Propiedades por Infraestruturas y Soporte: Reduccion consultas a los filtros
+company.security.auto.login=false
+company.security.auto.login.max.age=31536000
+auth.token.check.enabled=false
+com.liferay.portal.servlet.filters.sso.ntlm.NtlmFilter=false
+com.liferay.portal.sharepoint.SharepointFilter=false
+com.liferay.portal.servlet.filters.sso.opensso.OpenSSOFilter=false
+com.liferay.portal.servlet.filters.sso.ntlm.NtlmPostFilter=false
+
+#Captcha forgot password
+captcha.check.portal.send_password=false
+
+#Pagina 404 generica
+layout.show.http.status=true
+layout.friendly.url.page.not.found=/web/guest/error404
+
+#Politica de cookies
+cookies.policy.href.info=/aviso-legal
+lopd.href.info=/aviso-legal
+
+#Agenda
+lms.agenda.tabs=month,day
+lms.agenda.defaultTab=month
+
+#Nombre de la pagina frontal de la wiki
+wiki.front.page.name=Inicio
+
+#Configuracion idiomas y locale por defecto
+user.country=ES
+user.language=es
+
+#Seguridad Ticket #110023
+company.security.login.form.autocomplete=false
+
+layout.show.http.status=true
+
+#Ticket #110842
+discussion.subscribe.by.default=false
+
+layout.user.private.layouts.enabled=false
+layout.user.private.layouts.modifiable=false
+layout.user.private.layouts.auto.create=false
+layout.user.public.layouts.enabled=false
+layout.user.public.layouts.modifiable=false
+layout.user.public.layouts.auto.create=false
+
+#Evitar que el administrador pueda ocultar las siguientes paginas
+hidden.layouts=/reto,/muro,/mis-notas,/admin,/estudiantes1,/gradebook,/mailing,/estadisticas,/configuracion,/informes,/grupos
+
+#Permitir eliminar intentos
+learningactivity.show.califications.delete=true
+
+#Mostrar calificacion en el arbol de actividad
+learningactivity.show.status=true
+
+#Mostrar boton calificaciones
+learningactivity.show.califications=true
+
+#Tipo de registro en los cursos
+lms.site.types=1,2,3
+
+#Quitar pingback y trackback
+blogs.pingback.enabled=false
+blogs.trackback.enabled=true
+message.boards.pingback.enabled=true
+
+#Sobreescribir propiedad locales.beta para que ca_ES no aparezcan como beta
+locales.beta=ar_SA,eu_ES,bg_BG,ca_AD,zh_TW,hr_HR,da_DK,nl_NL,nl_BE,en_GB,et_EE,fi_FI,fr_FR,gl_ES,el_GR,iw_IL,hi_IN,in_ID,ja_JP,ko_KR,lo_LA,nb_NO,fa_IR,pl_PL,pt_PT,ro_RO,ru_RU,sr_RS,sr_RS_latin,sl_SI,sk_SK,sv_SE,uk_UA,vi_VN
+
+terms.of.use.journal.article.group.id=10180
+terms.of.use.journal.article.id=17301
+terms.of.use.required=true
+
