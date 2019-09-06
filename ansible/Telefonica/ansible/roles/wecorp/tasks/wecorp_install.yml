@@ -35,7 +35,7 @@
     dest: "/servicios/{{ dbname }}/tomcat-7.0.35/bin"
 
 - name: Inicia aplicação Wecorp
-  script: /servicios/{{ dbname }}/tomcat-7.0.35/bin/startup.sh
+  command: 'sh /servicios/{{ dbname }}/tomcat-7.0.35/bin/startup.sh'
 
 - name: Limpando diretorio /TMP
   command: rm -rf /tmp/*
