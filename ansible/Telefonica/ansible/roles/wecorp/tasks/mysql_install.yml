@@ -1,6 +1,6 @@
-- name: Instalando MySQL
+- name: Instalando MySQL e Libreoffice
   apt: 
-    name: ['mysql-client','mysql-server','python-pymysql','libreoffice']
+    name: ['mysql-client','mysql-server','libreoffice']
     update_cache: yes
     state: present
 
