@@ -34,8 +34,8 @@
     src: setenv.sh
     dest: "/servicios/{{ dbname }}/tomcat-7.0.35/bin"
 
-- name: Iniciando aplicação 
-  command: "/servicios/{{ dbname }}/tomcat-7.0.35/bin/./startup.sh"
+- name: Inicia aplicação Wecorp
+  script: /servicios/{{ dbname }}/tomcat-7.0.35/bin/startup.sh
 
 - name: Limpando diretorio /TMP
   command: rm -rf /tmp/*
