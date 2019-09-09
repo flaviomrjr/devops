@@ -1,0 +1,50 @@
+- name: Criando diretorio de backup MySQL
+  file:
+    path: /backup/dump
+    state: directory
+    recurse: yes
+    owner: root
+    group: root
+    mode: '0775'
+
+- name: Criando diretorio de backup aplicação
+  file: 
+    path: "/backup/{{ dbname }}"
+    state: directory
+    recurse: yes
+    owner: root
+    group: root
+    mode: '0775'
+
+- name: Criando diretorio para scripts
+  file:
+    path: /backup/scripts
+    state: directory
+    recurse: yes
+    owner: root
+    group: root
+    mode: '0775'
+
+- name: Copiando script de backup do MySQL
+  copy: 
+    src: mysql_bk.sh
+    dest: /backup/scripts
+
+- name: Copiando script de backup da Aplicação
+  template: 
+    src: backup_diario_wecorp.sh
+    dest: /backup/scripts
+
+- name: Configurando backup da aplicação na Cron
+  cron:
+    name: "Backup Wecorp"
+    minute: "30"
+    hour: "1"
+    job: "/backup/scripts/backup_diario_wecorp.sh  >/dev/null"
+
+- name: Configurando backup do MySQL na Cron
+  cron:
+    name: "Backup Mysql"
+    minute: "30"
+    hour: "4"
+    job: "/backup/scripts/mysql_bk.sh >/dev/null"
