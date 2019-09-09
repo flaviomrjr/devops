@@ -1,12 +1,14 @@
-- name: Instalando MySQL e Libreoffice
+- name: Instalando MySQL
   apt: 
-    name: ['mysql-client','mysql-server','libreoffice']
+    name: ['mysql-client','mysql-server']
     update_cache: yes
     state: present
 
-- name: Atualizando Repositorios
+- name: Instalando Libreoffice
   apt:
+    name: libreoffice
     update_cache: yes
+    state: present
   
 - name: Iniciando MySQL
   systemd:

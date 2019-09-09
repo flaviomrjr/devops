@@ -20,7 +20,7 @@
     state: present
     login_unix_socket: "/var/run/mysqld/mysqld.sock"
 
-- name: Criando Usuario
+- name: Criando Usuario MySQL para aplicação
   mysql_user:
     login_user: "root"
     login_password: "Mudar123@"
@@ -30,6 +30,20 @@
     priv: '{{ dbname }}.*:ALL,GRANT'
     state: present
 
+- name: Criando Usuario MySQL para dev
+  mysql_user:
+    login_user: "root"
+    login_password: "Mudar123@"
+    host: '%'
+    name: devlogs
+    password: 'Ted10gs'
+    priv: '{{ dbname }}.*:{{ item.permission }},GRANT'
+    state: present
+  when: "'{{ item.group }}' in group_names"
+  loop:
+  - { permission: "ALL", group: "dev" }
+  - { permission: "SELECT", group: "cert" }
+
 - name: Importar arquivo SQL para o banco criado
   mysql_db:
     login_user: "root"
@@ -37,6 +51,3 @@
     name: "{{ dbname }}"
     state: import
     target: "/tmp/{{ dbname }}.sql"
-
-
-
