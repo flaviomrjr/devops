@@ -1,8 +1,0 @@
-- name: Baixar Pacote Puppet
-  get_url: 
-    url: "{{ item.pacote }}"
-    dest: /tmp/
-  when: ansible_os_family == item.family
-  loop:
-  - { pacote: "https://yum.puppet.com/puppet6-release-el-7.noarch.rpm", family: "RedHat" }
-  - { pacote: "https://apt.puppet.com/puppet6-release-bionic.deb", family: "Debian" }

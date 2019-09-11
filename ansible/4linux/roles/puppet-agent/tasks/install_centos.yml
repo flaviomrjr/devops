@@ -2,10 +2,8 @@
   yum:
     name: /tmp/puppet6-release-el-7.noarch.rpm
     state: present
-  when: ansible_os_family == "RedHat"
 
 - name: Instalar o Puppet Agent - RedHat
   yum:
     name: puppet-agent
     state: present
-  when: ansible_os_family == "RedHat"
