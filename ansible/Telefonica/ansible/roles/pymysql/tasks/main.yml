@@ -1,7 +1,0 @@
----
-# tasks file for pymysql
-- name: Install Python-PyMySQL
-  apt:
-    name: python-pymysql
-    update_cache: yes
-    state: present

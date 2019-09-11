@@ -1,5 +1,0 @@
----
-- hosts: dev,cert
-  remote_user: root
-  roles:
-    - pymysql

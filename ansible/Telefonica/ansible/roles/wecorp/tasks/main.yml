@@ -1,5 +1,0 @@
-- include: apache_install.yml
-- include: mysql_install.yml
-- include: mysql_create_db.yml
-- include: java_install.yml
-- include: wecorp_install.yml
