@@ -1,0 +1,16 @@
+---
+# tasks file for apache-proxy
+- name: Copiando Template Apache
+  template: 
+    src: ambiente.cliente.conf
+    dest: "/etc/apache2/sites-available/{{ ambiente }}.{{ cliente }}.conf"
+
+- name: Ativando WebHost
+  command: "a2ensite {{ ambiente }}.{{ cliente }}.conf"
+
+- name: Apache reload
+  service: 
+    name: apache2
+    state: reloaded
+
+

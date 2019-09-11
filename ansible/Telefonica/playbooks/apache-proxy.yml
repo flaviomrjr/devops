@@ -1,0 +1,5 @@
+---
+- hosts: apache-proxy
+  remote_user: root
+  roles:
+    - apache-proxy
