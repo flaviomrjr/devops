@@ -1,0 +1,7 @@
+---
+# handlers file for bluegreen
+- name: reinicio
+  systemd:
+    name: nginx
+    state: restarted
+
