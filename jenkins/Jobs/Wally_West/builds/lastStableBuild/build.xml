@@ -1,0 +1,63 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<build>
+  <actions>
+    <hudson.model.CauseAction>
+      <causeBag class="linked-hash-map">
+        <entry>
+          <hudson.model.Cause_-UpstreamCause>
+            <upstreamProject>Barry_Allen</upstreamProject>
+            <upstreamUrl>job/Barry_Allen/</upstreamUrl>
+            <upstreamBuild>4</upstreamBuild>
+            <upstreamCauses>
+              <hudson.model.Cause_-UpstreamCause>
+                <upstreamProject>Jay_Garrick</upstreamProject>
+                <upstreamUrl>job/Jay_Garrick/</upstreamUrl>
+                <upstreamBuild>5</upstreamBuild>
+                <upstreamCauses>
+                  <hudson.model.Cause_-UserIdCause>
+                    <userId>admin</userId>
+                  </hudson.model.Cause_-UserIdCause>
+                </upstreamCauses>
+              </hudson.model.Cause_-UpstreamCause>
+            </upstreamCauses>
+          </hudson.model.Cause_-UpstreamCause>
+          <int>1</int>
+        </entry>
+      </causeBag>
+    </hudson.model.CauseAction>
+    <com.cloudbees.jenkins.plugins.bitbucket.FirstCheckoutCompletedInvisibleAction plugin="cloudbees-bitbucket-branch-source@2.4.6"/>
+    <hudson.plugins.chucknorris.RoundhouseAction plugin="chucknorris@1.2">
+      <mStyle>THUMB_UP</mStyle>
+      <mFact>Chuck Norris can solve the Towers of Hanoi in one move.</mFact>
+    </hudson.plugins.chucknorris.RoundhouseAction>
+    <hudson.plugins.sitemonitor.SiteMonitorRootAction plugin="sitemonitor@0.6">
+      <mResults>
+        <hudson.plugins.sitemonitor.model.Result>
+          <mSite>
+            <mUrl>http://192.168.99.30/jenkins</mUrl>
+            <timeout>30</timeout>
+            <successResponseCodes>
+              <int>200</int>
+            </successResponseCodes>
+            <admitInsecureSslCerts>false</admitInsecureSslCerts>
+          </mSite>
+          <mResponseCode>200</mResponseCode>
+          <mStatus>UP</mStatus>
+          <mNote>[UP] </mNote>
+        </hudson.plugins.sitemonitor.model.Result>
+      </mResults>
+    </hudson.plugins.sitemonitor.SiteMonitorRootAction>
+  </actions>
+  <queueId>11</queueId>
+  <timestamp>1568475992942</timestamp>
+  <startTime>1568475992965</startTime>
+  <result>SUCCESS</result>
+  <duration>149</duration>
+  <charset>UTF-8</charset>
+  <keepLog>false</keepLog>
+  <builtOn></builtOn>
+  <workspace>/var/lib/jenkins/workspace/Wally_West</workspace>
+  <hudsonVersion>2.176.3</hudsonVersion>
+  <scm class="hudson.scm.NullChangeLogParser"/>
+  <culprits class="com.google.common.collect.EmptyImmutableSortedSet"/>
+</build>

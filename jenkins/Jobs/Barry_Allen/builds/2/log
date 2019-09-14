@@ -1,0 +1,9 @@
+Started by upstream project "[8mha:////4BemyhpCt/QTBpYZ6a9q5EuTXvdUfrLC/VCchH0LEAM9AAAAnR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzuEgZB/az8JH2vxMp498SioszkbH0A+Zn15cYAAAA=[0mJay_Garrick" build number [8mha:////4IbCvYW5ywx2MRSF899xePavp+iJCeADP9dgzIBAX6flAAAAnB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLQAygGfpZ+Un6XomV8e6JRUWZydn6xgCTWBOdxwAAAA==[0m3
+originally caused by:
+ Started by user [8mha:////4D+AehUcdS2KP8vrQXc1KzjKgQuGrLRtKmXfeVsGi+OyAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzWEgZu/dLi1CL9xJTczDwAj6GcLcAAAAA=[0madmin
+Running as SYSTEM
+Building in workspace /var/lib/jenkins/workspace/Barry_Allen
+[Barry_Allen] $ /bin/bash /tmp/jenkins1789555905854761267.sh
+Aplicação Falhou
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE

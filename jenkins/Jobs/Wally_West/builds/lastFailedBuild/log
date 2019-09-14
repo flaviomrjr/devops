@@ -1,0 +1,15 @@
+Started by upstream project "[8mha:////4J0DouX3sj3CE6xhOTJxjL74NZKD/L09+MiGVVPS2xoZAAAAnB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzuEgZB/az8JH2nxKKiynjHHKD5+gBhyqYTxgAAAA==[0mBarry_Allen" build number [8mha:////4BNZaY62w7AvnxuBbWIbDVNU5qIoHLCbaX2W6gt6T6PhAAAAmx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLQAygGfpZ+Un6TolFRZXxjjlA8/UNAZpxP43HAAAA[0m1
+originally caused by:
+ Started by upstream project "[8mha:////4BemyhpCt/QTBpYZ6a9q5EuTXvdUfrLC/VCchH0LEAM9AAAAnR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzuEgZB/az8JH2vxMp498SioszkbH0A+Zn15cYAAAA=[0mJay_Garrick" build number [8mha:////4H27lgBh8l1FsfSooCUZFQE7RubyL9lNikBJOktswJDZAAAAnB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLQAygGfpZ+Un6XomV8e6JRUWZydn6RgAFaBTqxwAAAA==[0m2
+ originally caused by:
+  Started by user [8mha:////4D+AehUcdS2KP8vrQXc1KzjKgQuGrLRtKmXfeVsGi+OyAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzWEgZu/dLi1CL9xJTczDwAj6GcLcAAAAA=[0madmin
+Running as SYSTEM
+Building in workspace /var/lib/jenkins/workspace/Wally_West
+[Wally_West] $ /bin/sh -xe /tmp/jenkins4704502465084573423.sh
++ sudo httpd -k restart
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 127.0.0.1. Set the 'ServerName' directive globally to suppress this message
+java.net.SocketTimeoutException: connect timed out - connect timed out
+URL: http://192.168.0.30/, response code: null, status: DOWN
+Build step 'Monitor Site' changed build result to FAILURE
+Build step 'Monitor Site' marked build as failure
+Finished: FAILURE
