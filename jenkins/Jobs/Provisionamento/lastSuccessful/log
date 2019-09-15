@@ -1,0 +1,55 @@
+Started by GitLab push by Administrator
+Running as SYSTEM
+Building in workspace /var/lib/jenkins/workspace/Provisionamento
+Instance 'Rundeck' with rundeck user 'admin': Notifying Rundeck...
+Looking for jobId : bec2504a-9d85-4955-8ef0-0ab8be517277
+Notification succeeded ! Execution #25, at http://192.168.99.30:4440/api/32/execution/25 (status : RUNNING)
+Waiting for Rundeck execution to finish...
+BEGIN RUNDECK TAILED LOG OUTPUT
+[20:41:02] [NORMAL] ________________________________
+[20:41:02] [NORMAL] < PLAY [PLAYBOOK DA BALEIA AZUL] >
+[20:41:02] [NORMAL] --------------------------------
+[20:41:02] [NORMAL] \   ^__^
+[20:41:02] [NORMAL] \  (oo)\_______
+[20:41:02] [NORMAL] (__)\       )\/\
+[20:41:02] [NORMAL] ||----w |
+[20:41:02] [NORMAL] ||     ||
+[20:41:02] [NORMAL] ________________________
+[20:41:02] [NORMAL] < TASK [Gathering Facts] >
+[20:41:02] [NORMAL] ------------------------
+[20:41:02] [NORMAL] \   ^__^
+[20:41:02] [NORMAL] \  (oo)\_______
+[20:41:02] [NORMAL] (__)\       )\/\
+[20:41:02] [NORMAL] ||----w |
+[20:41:02] [NORMAL] ||     ||
+[20:41:08] [NORMAL] ok: [192.168.99.20]
+[20:41:08] [NORMAL] ________________________
+[20:41:08] [NORMAL] < TASK [Build Container] >
+[20:41:08] [NORMAL] ------------------------
+[20:41:08] [NORMAL] \   ^__^
+[20:41:08] [NORMAL] \  (oo)\_______
+[20:41:08] [NORMAL] (__)\       )\/\
+[20:41:08] [NORMAL] ||----w |
+[20:41:08] [NORMAL] ||     ||
+[20:41:54] [NORMAL] changed: [192.168.99.20] => (item={u'volume': u'/root/blue/', u'nome': u'blue'})
+[20:41:55] [NORMAL] changed: [192.168.99.20] => (item={u'volume': u'/root/green/', u'nome': u'green'})
+[20:41:55] [NORMAL] [DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host 192.168.99.20 should
+[20:41:55] [NORMAL] use /usr/bin/python3, but is using /usr/bin/python for backward compatibility
+[20:41:55] [NORMAL] with prior Ansible releases. A future Ansible release will default to using the
+[20:41:55] [NORMAL] discovered platform python for this host. See https://docs.ansible.com/ansible
+[20:41:55] [NORMAL] /2.8/reference_appendices/interpreter_discovery.html for more information. This
+[20:41:55] [NORMAL] feature will be removed in version 2.12. Deprecation warnings can be disabled
+[20:41:55] [NORMAL] by setting deprecation_warnings=False in ansible.cfg.
+[20:41:55] [NORMAL] ____________
+[20:41:55] [NORMAL] < PLAY RECAP >
+[20:41:55] [NORMAL] ------------
+[20:41:55] [NORMAL] \   ^__^
+[20:41:55] [NORMAL] \  (oo)\_______
+[20:41:55] [NORMAL] (__)\       )\/\
+[20:41:55] [NORMAL] ||----w |
+[20:41:55] [NORMAL] ||     ||
+[20:41:55] [NORMAL] 192.168.99.20              : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+END RUNDECK TAILED LOG OUTPUT
+Rundeck execution #25 finished in 55 seconds, with status : SUCCEEDED
+Triggering a new build of [8mha:////4B170Mm6+a5tVbF9RDktnFjgc+Drg8AHITLYiz8MqsELAAAAmB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAy2EgYe/az8JH2X1IKc/Ep9ANFMbsTBAAAA[0mDeploy
+Finished: SUCCESS

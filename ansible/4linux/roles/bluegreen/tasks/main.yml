@@ -1,0 +1,49 @@
+---
+# tasks file for bluegreen
+- name: Verificando o Ambiente
+  stat:
+    path: /etc/nginx/sites-enabled/green.conf
+  register: ambiente
+
+- name: Atualizando INDEX.HTML
+  copy:
+    src: "{{ WORKSPACE_JENKINS }}/index.html"
+    dest: "{{ item.dest }}"
+  when: ambiente.stat.exists == item.cond
+  loop  :
+  - { dest: /root/green/index.html, cond: False }
+  - { dest: /root/blue/index.html, cond: True }
+  
+- name: Coletando IP do Container
+  command: "docker exec {{ item.container }} hostname -i"
+  when: ambiente.stat.exists == item.cond
+  register: ipcontainer
+  loop:
+  - { container: green, cond: False }
+  - { container: blue, cond: True }
+
+- name: Atualizando VirtualHost
+  template:
+    src: "{{ item.arq }}"
+    dest: /etc/nginx/sites-enabled/
+  when: ambiente.stat.exists == item.cond
+  notify: reinicio
+  loop:
+  - { arq: green.conf, cond: False }
+  - { arq: blue.conf, cond: True }
+
+- name: Removendo o Ambiente Anterior
+  file:
+    path: "/etc/nginx/sites-enabled/{{ item.arq }}"
+    state: absent
+  when: ambiente.stat.exists == item.cond
+  loop:
+  - { arq: blue.conf, cond: False }
+  - { arq: green.conf, cond: True }
+
+- name: Removendo VirtualHost Default
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
+  

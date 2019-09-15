@@ -1,0 +1,133 @@
+Started by upstream project "[8mha:////4HtloEwf7Y9SidoVxgvyfhUjhrZDwOQdAvhOgOHtbSLzAAAAoR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz+EgZR/az8JP2AovyyzOLM/LzE3NS8knx9AGSD4cbKAAAA[0mProvisionamento" build number [8mha:////4JC8yatkPN5jWlWN8UA9orDNUhzYwCx58vqq/RIq+BVBAAAAoR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLQIwSBjH9rPwk/YCi/LLM4sz8vMTc1LySfH1DAEVi19XLAAAA[0m1
+originally caused by:
+ Started by GitLab push by Administrator
+Running as SYSTEM
+Building in workspace /var/lib/jenkins/workspace/Deploy
+using credential gitlab_user
+Cloning the remote Git repository
+Cloning repository http://192.168.99.20:8080/root/bluegren.git
+ > git init /var/lib/jenkins/workspace/Deploy # timeout=10
+Fetching upstream changes from http://192.168.99.20:8080/root/bluegren.git
+ > git --version # timeout=10
+using GIT_ASKPASS to set credentials gitlab_user
+ > git fetch --tags --progress http://192.168.99.20:8080/root/bluegren.git +refs/heads/*:refs/remotes/origin/*
+ > git config remote.origin.url http://192.168.99.20:8080/root/bluegren.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url http://192.168.99.20:8080/root/bluegren.git # timeout=10
+Fetching upstream changes from http://192.168.99.20:8080/root/bluegren.git
+using GIT_ASKPASS to set credentials gitlab_user
+ > git fetch --tags --progress http://192.168.99.20:8080/root/bluegren.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 46c1e0f59484fccd11aaddc20eeb69564f84a4ec (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 46c1e0f59484fccd11aaddc20eeb69564f84a4ec
+Commit message: "First"
+First time build. Skipping changelog.
+[Deploy] $ ansible-playbook /etc/ansible/playbooks/bluegreen.yml -i /etc/ansible/hosts -f 5 --private-key /tmp/ssh6015480767117479293.key -u root -e WORKSPACE_JENKINS=/var/lib/jenkins/workspace/Deploy
+ _______________
+< PLAY [docker] >
+ ---------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ ________________________
+< TASK [Gathering Facts] >
+ ------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [192.168.99.20]
+ ___________________________________________
+< TASK [bluegreen : Verificando o Ambiente] >
+ -------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [192.168.99.20]
+ ___________________________________________
+< TASK [bluegreen : Atualizando INDEX.HTML] >
+ -------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [192.168.99.20] => (item={u'dest': u'/root/green/index.html', u'cond': False})
+skipping: [192.168.99.20] => (item={u'dest': u'/root/blue/index.html', u'cond': True}) 
+ ______________________________________________
+< TASK [bluegreen : Coletando IP do Container] >
+ ----------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [192.168.99.20] => (item={u'container': u'green', u'cond': False})
+skipping: [192.168.99.20] => (item={u'container': u'blue', u'cond': True}) 
+ ____________________________________________
+< TASK [bluegreen : Atualizando VirtualHost] >
+ --------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [192.168.99.20] => (item={u'arq': u'green.conf', u'cond': False})
+skipping: [192.168.99.20] => (item={u'arq': u'blue.conf', u'cond': True}) 
+ __________________________________________________
+< TASK [bluegreen : Removendo o Ambiente Anterior] >
+ --------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [192.168.99.20] => (item={u'arq': u'blue.conf', u'cond': False})
+skipping: [192.168.99.20] => (item={u'arq': u'green.conf', u'cond': True}) 
+ __________________________________________________
+< TASK [bluegreen : Removendo VirtualHost Default] >
+ --------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [192.168.99.20]
+ ________________________________________
+< RUNNING HANDLER [bluegreen : reinicio] >
+ ----------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [192.168.99.20]
+ ____________
+< PLAY RECAP >
+ ------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+192.168.99.20              : ok=8    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Triggering a new build of [8mha:////4J6Wom8VAsJDhcwLVY79hseKBcGnlfkURn7Qhixw75qkAAAAmh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyuEgYB/az8JH3f/LzMknyQCfoAmnx2RcUAAAA=[0mMonitoring
+Finished: SUCCESS

@@ -1,0 +1,14 @@
+---
+- name: PLAYBOOK DA BALEIA AZUL
+  hosts: docker
+  tasks:
+    - name: Build Container
+      docker_container:
+        name: "{{ item.nome }}" 
+        image: httpd:alpine
+        state: started
+        volumes:
+        - "{{ item.volume }}:/usr/local/apache2/htdocs/"
+      loop:
+      - { nome: blue, volume: /root/blue/ }
+      - { nome: green, volume: /root/green/ }

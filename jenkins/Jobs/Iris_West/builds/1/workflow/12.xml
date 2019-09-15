@@ -1,0 +1,28 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<Tag plugin="workflow-support@3.3">
+  <node class="cps.n.StepAtomNode" plugin="workflow-cps@2.74">
+    <parentIds>
+      <string>11</string>
+    </parentIds>
+    <id>12</id>
+    <descriptorId>org.jenkinsci.plugins.workflow.steps.CoreStep</descriptorId>
+  </node>
+  <actions>
+    <cps.a.ArgumentsActionImpl plugin="workflow-cps@2.74">
+      <arguments>
+        <entry>
+          <string>delegate</string>
+          <org.jenkinsci.plugins.structs.describable.UninstantiatedDescribable plugin="structs@1.20">
+            <symbol>cleanWs</symbol>
+            <arguments class="tree-map"/>
+          </org.jenkinsci.plugins.structs.describable.UninstantiatedDescribable>
+        </entry>
+      </arguments>
+      <isUnmodifiedBySanitization>true</isUnmodifiedBySanitization>
+    </cps.a.ArgumentsActionImpl>
+    <wf.a.TimingAction plugin="workflow-api@2.37">
+      <startTime>1568482000532</startTime>
+    </wf.a.TimingAction>
+    <s.a.LogStorageAction/>
+  </actions>
+</Tag>
