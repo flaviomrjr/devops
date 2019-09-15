@@ -1,0 +1,69 @@
+DESAFIO 1
+Fazer uma playbook chamada desafiador.yml e criar as seguintes tasks:
+
+1. Remover o NGINX
+2. Instalar os Seguintes Pacotes:
+     MÁQUINAS UBUNTU: apache2, libapache2-mod-php7.0, php7.0 
+     MÁQUINAS CENTOS: httpd, php
+3. Habilitar o modulo php7.0 na Máquinas Ubuntu
+    Comando: a2enmod php7.0
+4. Reiniciar o HTTPD/Apache2
+5. Criar o arquivo index.php e enviar para o diretório /var/www/html/
+6. Adicionar em index.php o seguinte conteúdo:
+ 
+		<?php echo "Desafio Completo" ?>
+
+============================= RESOLUÇÃO=====================================
+
+---
+- name: Desafiador
+  hosts: all
+  tasks:
+    - name: Para NGINX
+      systemd:
+        name: nginx
+        state: stopped
+      ignore_errors: True
+
+    - name: Desinstalando NGINX
+      package:
+        name: nginx
+        state: absent
+
+    - name: Instalando Pacotes - UBUNTU
+      apt:
+        name: ['apache2','libapache2-mod-php7.2','php7.2']
+        update_cache: yes
+        state: present
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Instalando Pacotes - CENTOS
+      yum:
+        name: ['httpd','php']
+        state: present
+      notify: httpd
+      when: ansible_distribution == "CentOS"
+
+    - name: Habilitando Modulo do Apache
+      apache2_module:
+        name: php7.2
+        state: present
+      notify: apache
+      when: ansible_distribution == "Ubuntu"
+      
+    - name: Criando Arquivo Index.php
+      lineinfile:
+        path: /var/www/html/index.php
+        line: '<?php echo "Desafio Completo" ?>'
+        create: yes
+  
+  handlers:
+  - name: httpd
+    systemd:
+      name: httpd
+      state: restarted
+
+  - name: apache
+    systemd: 
+      name: apache2
+      state: restarted

@@ -1,0 +1,8 @@
+#!/bin/bash
+if [ $(($RANDOM%2)) == 0 ]; then
+  echo "Aplicação OK"
+  exit 0
+else
+  echo "Aplicação Falhou"
+  exit 1
+fi

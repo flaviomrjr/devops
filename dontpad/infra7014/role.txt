@@ -1,0 +1,85 @@
+# cd /etc/ansible/roles
+# ansible-galaxy init lex_luthor
+# cd lex_luthor/tasks/
+# vim prerequisitos.yml
+- name: Instalando Banco e Web - Ubuntu
+  apt:
+    name: ['mysql-client','mysql-server','python-pymysql','apache2']
+    update_cache: yes
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: Instalando Banco e Web - CentOS 
+  yum:
+    name: ['mariadb','mariadb-server','MySQL-python','httpd']
+    state: present
+  when: ansible_os_family == 'RedHat'
+
+# vim iniciando_banco.yml
+- name: Iniciando MySQL
+  systemd: name=mysql state=restarted
+  when: ansible_os_family == 'Debian'
+
+- name: Iniciando MariaDB
+  systemd:
+    name: mariadb
+    state: restarted
+  when: ansible_os_family == 'RedHat'
+
+# vim prov_database.yml
+- name: Criando Base de Dados
+  mysql_db:
+    name: metropolis
+    state: present
+    login_unix_socket: "{{ item.socket }}"
+  when: ansible_os_family == item.familia
+  loop:
+  - { socket: "/var/lib/mysql/mysql.sock", familia: "RedHat" }
+  - { socket: "/var/run/mysqld/mysqld.sock", familia: "Debian" }
+    
+- name: Criando User DB
+  mysql_user:
+    name: suporte
+    password: "4linux"
+    priv: 'metropolis.*:ALL,GRANT'
+    state: present
+    login_unix_socket: "{{ item.socket }}"
+  when: ansible_os_family == item.familia
+  loop:
+  - { socket: "/var/lib/mysql/mysql.sock", familia: "RedHat" }
+  - { socket: "/var/run/mysqld/mysqld.sock", familia: "Debian" }
+
+
+# vim deploy_appweb.yml
+- name: Web App
+  template:
+    src: index.html
+    dest: /var/www/html/index.html 
+
+- name: Baixar uma Imagem
+  get_url:
+    url: https://www.sideshow.com/storage/product-images/300219/lex-luthor-power-suit_dc-comics_gallery_5c4dfa36d7afe.jpg
+    dest: /var/www/html/imagem.jpg
+
+- name: Restart Apache/HTTPD
+  systemd:
+    name: "{{ item.programa }}"
+    state: restarted
+  when: ansible_os_family == item.familia
+  loop:
+  - { programa: "apache2", familia: "Debian" }
+  - { programa: "httpd", familia: "RedHat" }
+
+
+# vim main.yml	
+---
+# tasks file for lex_luthor
+- include: prerequisitos.yml
+- include: iniciando_banco.yml
+- include: prov_database.yml
+- include: deploy_appweb.yml
+
+# vim ../template/index.html
+<h1> Kryptonita!!! </h1>
+<marquee> {{texto}} </marquee>
+<img src="imagem.jpg" />

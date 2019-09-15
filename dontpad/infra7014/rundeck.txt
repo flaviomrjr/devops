@@ -1,0 +1,2 @@
+https://docs.rundeck.com/downloads.html
+http://repo.rundeck.org/latest.rpm

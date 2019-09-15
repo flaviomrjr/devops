@@ -1,0 +1,2 @@
+https://github.com/designmodo/Flat-UI
+https://jenkins.io/doc/book/pipeline/#declarative-versus-ed-pipeline-syntax

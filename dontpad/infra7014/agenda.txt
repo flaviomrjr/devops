@@ -1,0 +1,5 @@
+Aula01 - Teoria e Ansible
+Aula02 - Ansible(Final) e Puppet
+Aula03 - Puppet(Final) / Docker 
+Aula04 - Docker (Final) / Git-GitLab  / Rundeck
+Aula05 - Jenkins / BlueGreen Deployment / Cloud (AWS, talvez GCP)

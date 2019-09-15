@@ -1,0 +1,24 @@
+automation:
+  nodename: automation
+  hostname: 192.168.99.30
+  osVersion: 3.10.0-693.21.1.el7.x86_64
+  osFamily: unix
+  osArch: amd64
+  description: Rundeck Node Automation
+  osName: Linux
+  username: root
+  tags: ''
+devops:
+  nodename: devops
+  hostname: 192.168.99.10
+  description: Rundeck Node DevOps
+  osName: Linux
+  username: root
+  tags: ''
+docker:
+  nodename: docker
+  hostname: 192.168.99.20
+  description: Rundeck Node Docker
+  osName: Linux
+  username: root
+  tags: ''
