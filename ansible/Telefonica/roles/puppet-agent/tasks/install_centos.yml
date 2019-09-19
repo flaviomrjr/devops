@@ -1,0 +1,9 @@
+- name: Instalar Repositorio Puppet - RedHat
+  yum:
+    name: /tmp/puppet6-release-el-7.noarch.rpm
+    state: present
+
+- name: Instalar o Puppet Agent - RedHat
+  yum:
+    name: puppet-agent
+    state: present
