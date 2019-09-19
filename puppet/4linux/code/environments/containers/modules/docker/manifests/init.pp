@@ -25,7 +25,7 @@ class docker {
 				baseurl => 'https://download.docker.com/linux/centos/7/$basearch/stable',
 				gpgkey => 'https://download.docker.com/linux/centos/gpg',
 				gpgcheck => 1,
-				enable => 1,
+				enabled => 1,
 				require => Package[$pacotes]
 			}
 	
