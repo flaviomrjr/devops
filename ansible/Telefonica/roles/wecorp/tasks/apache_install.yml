@@ -6,13 +6,9 @@
   
 - name: Habilitando Dependencias do Apache
   command: "a2enmod {{ item }}"
+  notify: apacherestart
   loop:
   - proxy
   - rewrite
   - proxy_ajp
   - proxy_http
-
-- name: Reiniciando o Apache
-  systemd: 
-    name: apache2
-    state: restarted     
