@@ -1,0 +1,30 @@
+description: Ops, all access.
+context:
+  project: '.*' # all projects
+for:
+  resource:
+    - allow: [read] # allow read/create all kinds
+  adhoc:
+    - allow: [read] # allow read/running/killing adhoc jobs
+  job: 
+    - allow: [read,run,kill,enable_executions,disable_executions,toggle_schedule,toggle_execution] # allow read/write/delete/run/kill of all jobs
+  node:
+    - allow: [read,run] # allow read/run for all nodes
+  event:
+    - allow: [read]
+    
+by:
+  group: ops
+
+---
+
+description: Ops, access.
+context:
+  application: 'rundeck'
+for:
+  project:
+    - allow: [read] # allow view/admin of all projects
+  storage:
+    - allow: [read]
+by:
+  group: ops
