@@ -1,0 +1,21 @@
+* apos a instalacao
+
+-> cd /etc/puppetlabs/code/modules/
+
+criar um novo modulo
+
+-> pdk new module confsbase --skip-interview
+
+-> cd confsbase/
+-> touch manifests/{init,users,packages,hosts}.pp
+-> vim manifests/init.pp
+
+class confsbase
+{
+        # adiciono o conteudo que estou referenciando
+        include confsbase::users
+        include confsbase::packages
+        include confsbase::hosts
+}
+
+

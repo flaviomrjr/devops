@@ -1,0 +1,72 @@
+class confsbase::hosts {
+
+
+  file {'/root/.vimrc':
+    ensure => present,
+    source => 'puppet:///modules/confsbase/vimrc', # /modules/confsbase/files/vimrc
+    mode => '0644'
+  }
+
+  file {'/etc/hosts':
+    ensure => present,
+    mode => '0644',
+    content => ' '
+  }
+
+
+  # 127.0.0.1  localhost.localdomain localhost
+  host {'localhost.localdomain':
+    ip => '127.0.0.1',
+    host_aliases => 'localhost'
+  }
+
+#192.168.170.10  devops-center.auto4linux.com.br
+
+  host {'devops-center.auto4linux.com.br':
+    ip => '192.168.170.10',
+    host_aliases => 'devops-center'
+  }
+
+
+#192.168.170.11  load-balancer.auto4linux.com.br
+
+  host {'load-balancer.auto4linux.com.br':
+    ip => '192.168.170.11',
+    host_aliases => 'load-balancer'
+  }
+
+#192.168.170.12  web01.auto4linux.com.br
+  host {'web01.auto4linux.com.br':
+    ip => '192.168.170.12',
+    host_aliases => 'web01'
+  }
+
+#192.168.170.13  web02.auto4linux.com.br
+  host {'web02.auto4linux.com.br':
+    ip => '192.168.170.13',
+    host_aliases => 'web02'
+  }
+
+#192.168.170.14  database.auto4linux.com.br
+  host {'database.auto4linux.com.br':
+    ip => '192.168.170.14',
+    host_aliases => 'database'
+  }
+
+#192.168.170.15  testing.auto4linux.com.br
+  host {'testing.auto4linux.com.br':
+    ip => '192.168.170.15',
+    host_aliases => 'testing'
+  }
+
+#192.168.170.16  homolog.auto4linux.com.br
+  host {'homolog.auto4linux.com.br':
+    ip => '192.168.170.16',
+    host_aliases => 'homolog'
+  }
+
+
+
+
+
+}

@@ -1,0 +1,15 @@
+node /^(web01|web02)\.auto4linux\.com\.br$/{
+        include confsbase
+        include webserver
+
+        exec {'Disable SElinux':
+                command => 'setenforce 0',
+                path => ['/sbin']
+        }
+}
+
+node 'database.auto4linux.com.br'{
+        include confsbase
+        include memcached
+        include mysqlserver
+}

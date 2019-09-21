@@ -1,0 +1,65 @@
+Dontpad
+http://dontpad.com/511-4linux
+
+Repositório do Vagrant
+GIT: https://github.com/jrballot/511.git
+Web: https://github.com/jrballot/511
+
+
+Bult-in functions
+https://puppet.com/docs/puppet/5.5/function.html#warning
+
+Download modulos da aplicacao
+curl -L -O https://github.com/jrballot/511/raw/master/Puppet/appmodules.tar.bz2
+
+
+
+
+node 'web01.auto4linux.com.br' {
+        include confsbase
+        include webserver
+        webserver::configure{'webserver':
+        banco => 'database.auto4linux.com.br',
+        cache => 'database.auto4linux.com.br'
+        }
+
+        exec {'Disable SELinux':
+                command => 'setenforce 0',
+                path => '/sbin'
+        }
+
+}
+
+node 'web02.auto4linux.com.br' {
+        include confsbase
+        include webserver
+        webserver::configure{'webserver':
+        banco => 'database.auto4linux.com.br',
+        cache => 'database.auto4linux.com.br'
+        }
+
+        exec {'Disable SELinux':
+                command => 'setenforce 0',
+                path => ['/sbin']
+        }
+
+}
+
+
+
+node 'database.auto4linux.com.br' {
+        include confsbase
+        include memcached
+        include mysqlserver
+}
+
+node 'load-balancer.auto4linux.com.br' {
+        include confsbase
+        include balancer
+        balancer::configure{'lb':
+        cache => 'database.auto4linux.com.br',
+        web1 => 'web01.auto4linux.com.br',
+        web2 => 'web02.auto4linux.com.br'
+
+        }
+}

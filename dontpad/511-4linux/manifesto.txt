@@ -1,0 +1,53 @@
+user{'devops':
+        ensure => present,
+        managehome => true,
+        comment => "Usuario DevOps",
+        shell => '/bin/bash',
+        home => '/home/analista-devops'
+}
+
+
+if $osfamily == 'CentOS'
+{
+        package
+        {
+                'epel-release':
+                        ensure => present
+        }
+}
+
+package { 'sl':
+        ensure => present
+}
+
+
+package
+{
+        ['atop', 'htop']:
+                ensure => present
+}
+
+service
+{
+        'crond':
+                ensure => stopped,
+                enable => false
+}
+
+host
+{
+        'testing.auto4linux.com.br':
+                ip => '192.168.170.16',
+                host_aliases => 'testing.auto4linux.com.br'
+}
+
+node 'testing.auto4linux.com.br'
+{
+        file
+        {
+                'linksimbolico':
+                        path => '/tmp/sl',
+                        ensure => link,
+                        target => '/usr/games/sl'
+        }
+}
