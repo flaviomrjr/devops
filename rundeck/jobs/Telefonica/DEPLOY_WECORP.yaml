@@ -43,7 +43,7 @@
         \ ###ADD HOST NO GRUPO QUE ELE PERTENCE\nfi"
     - description: Execução da Playbook Wecorp
       exec: ansible-playbook /etc/ansible/playbooks/wecorp.yml -e "dbname={$option.dbname} host=${option.hostip}"
-    - exec: /servicios/$option.dbname/tomcat-7.0.35/bin/startup.sh
+    - exec: /servicios/{$option.dbname}/tomcat-7.0.35/bin/startup.sh
     keepgoing: false
     strategy: node-first
   uuid: a1040eb5-3cab-41d7-b8e0-8cd845d3e0c7
