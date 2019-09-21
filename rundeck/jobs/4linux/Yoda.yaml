@@ -1,0 +1,59 @@
+- defaultTab: nodes
+  description: Job da força!
+  executionEnabled: true
+  id: dc22c03f-17df-48b5-ae83-dac97eade974
+  loglevel: INFO
+  name: Yoda
+  nodeFilterEditable: false
+  nodefilters:
+    dispatch:
+      excludePrecedence: true
+      keepgoing: false
+      rankOrder: ascending
+      successOnEmptyNodeFilter: false
+      threadcount: '1'
+    filter: 'name: devops, docker'
+  nodesSelectedByDefault: true
+  options:
+  - name: PASTA
+    required: true
+    value: /root/backup
+    values:
+    - /var/backup
+    - /opt/backup
+    valuesListDelimiter: ','
+  schedule:
+    month: '*'
+    time:
+      hour: '*'
+      minute: 0/2
+      seconds: '0'
+    weekday:
+      day: '*'
+    year: '*'
+  scheduleEnabled: false
+  sequence:
+    commands:
+    - configuration:
+        export: DIA
+        group: export
+        value: $(date +%F-%H-%M-%S)
+      nodeStep: false
+      type: export-var
+    - errorhandler:
+        exec: echo "$? Falhou"
+      script: "#!/bin/bash\nVERIFICACAO=1;\n \necho \"[Ini]Backup Iniciado...\"\n\
+        echo \"[-   ]Validando Existencia - @option.PASTA@\"\ntest -d @option.PASTA@\
+        \ || mkdir -p @option.PASTA@\n \nwhile [[ $VERIFICACAO < 4 ]]; do\n  case\
+        \ $VERIFICACAO in\n    1)\n      echo \"[--  ]Realizando Backup /etc/\";\n\
+        \      tar zcf @option.PASTA@/etc-@node.name@_@export.DIA@.tar.gz /etc/ &>\
+        \ /dev/null || exit 1;\n      VERIFICACAO=2;\n    ;;\n    2)\n        echo\
+        \ \"[--- ]Realizando Backup Lista de Programas\";\n      apt list --installed\
+        \ > @option.PASTA@/programas_instalados-@node.name@_@export.DIA@.txt &> /dev/null\
+        \ || exit 2\n      VERIFICACAO=3;\n    ;;\n    3)\n        echo \"[----]Encaminhando\
+        \ para Automation\";\n      scp @option.PASTA@/* root@192.168.99.30:/root/backup/\
+        \ || exit 3\n      VERIFICACAO=4;\n    ;;\n  esac\ndone\n \necho \"[Concl]Backup\
+        \ Finalizado!\""
+    keepgoing: false
+    strategy: node-first
+  uuid: dc22c03f-17df-48b5-ae83-dac97eade974

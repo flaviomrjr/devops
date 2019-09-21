@@ -1,0 +1,30 @@
+- defaultTab: nodes
+  description: ''
+  executionEnabled: true
+  id: bec2504a-9d85-4955-8ef0-0ab8be517277
+  loglevel: INFO
+  name: Docker
+  nodeFilterEditable: false
+  nodefilters:
+    dispatch:
+      excludePrecedence: true
+      keepgoing: false
+      rankOrder: ascending
+      successOnEmptyNodeFilter: false
+      threadcount: '1'
+    filter: 'name: docker'
+  nodesSelectedByDefault: true
+  scheduleEnabled: true
+  sequence:
+    commands:
+    - configuration:
+        ansible-base-dir-path: /etc/ansible
+        ansible-become: 'false'
+        ansible-playbook: /etc/ansible/playbooks/docker.yml
+        ansible-ssh-auth-type: privateKey
+        ansible-ssh-user: root
+      nodeStep: true
+      type: com.batix.rundeck.plugins.AnsiblePlaybookWorflowNodeStep
+    keepgoing: false
+    strategy: node-first
+  uuid: bec2504a-9d85-4955-8ef0-0ab8be517277

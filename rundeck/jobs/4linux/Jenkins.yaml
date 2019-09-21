@@ -1,0 +1,26 @@
+- defaultTab: nodes
+  description: Instalação do Jenkins
+  executionEnabled: true
+  id: b5cba48a-9508-4b4b-b1d3-64346a2da727
+  loglevel: INFO
+  name: Jenkins
+  nodeFilterEditable: false
+  nodefilters:
+    dispatch:
+      excludePrecedence: true
+      keepgoing: false
+      rankOrder: ascending
+      successOnEmptyNodeFilter: false
+      threadcount: '1'
+    filter: 'name: automation_root'
+  nodesSelectedByDefault: true
+  scheduleEnabled: true
+  sequence:
+    commands:
+    - exec: wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+    - exec: rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+    - exec: yum install jenkins -y
+    - exec: yum install java -y
+    keepgoing: false
+    strategy: node-first
+  uuid: b5cba48a-9508-4b4b-b1d3-64346a2da727

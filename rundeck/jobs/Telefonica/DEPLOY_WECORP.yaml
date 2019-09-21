@@ -1,0 +1,49 @@
+- defaultTab: nodes
+  description: "Job utilizado para criar um ambiente do Wecorp utilizando a aplicaç\
+    ão definida.  \n\n## Parametros utilizados:  \n\nVocê deve definir os parametros\
+    \ a seguir para configurar a aplicação.  \nutilize todos os nomes com letras minusculas,\
+    \ nao use caracteres especiais e  \nnão use acentos.  \n\n**dbname:**  \n\nSera\
+    \ utilizado para criar o diretório e banco: **wecorp_nomedocliente**\n\n**hostgroup:**\n\
+    \nSera utilizado para definir em qual grupo o host será adicionado no arquivo\
+    \ de hosts do ansible: **dev**\n\n**hostip:**\n\nSerá utilizado para definir o\
+    \ IP do host no arquivo de hosts do ansible: **192.168.0.10**"
+  executionEnabled: true
+  id: a1040eb5-3cab-41d7-b8e0-8cd845d3e0c7
+  loglevel: INFO
+  name: DEPLOY_WECORP
+  nodeFilterEditable: false
+  nodefilters:
+    dispatch:
+      excludePrecedence: true
+      keepgoing: false
+      rankOrder: ascending
+      successOnEmptyNodeFilter: false
+      threadcount: '1'
+    filter: 'name: devops'
+  nodesSelectedByDefault: true
+  options:
+  - description: Nome da aplicação e DB
+    name: dbname
+  - description: Define em qual grupo de hosts o servidor será inserido
+    name: hostgroup
+  - description: Define o IP do host em que será executado
+    name: hostip
+  scheduleEnabled: true
+  sequence:
+    commands:
+    - description: Adiciona o hostgroup e hostip no arquivos de hosts do ansible
+      script: "#!/bin/bash\n### SCRITP RESPONSAVEL PELA VERIFICAÇÃO E ALTERAÇÃO DO\
+        \ ARQUIVO HOSTS DO ANSIBLE\n### AUTOR: FLAVIO ROCHA\n### EMAIL: flavio.rocha16@gmail.com\n\
+        ### DATA: 20/09/2019\ncat /etc/ansible/hosts | grep @option.hostgroup@ ###VERIFICA\
+        \ SE O HOSTGROUP EXISTE\nif [ $? -eq 0 ]; then\n\techo \"HosGroup ja existe\"\
+        \ \nelse\n\techo [@option.hostgroup@] >> /etc/ansible/hosts ###ADD HOSTGROUP\n\
+        fi\ncat /etc/ansible/hosts | grep @option.hostip@ ###VERIFICA SE O HOST EXISTE\n\
+        if [ $? -eq 0 ]; then\n\techo \"HostIP ja existe\" \nelse\n\tsed -i \"s/\"\
+        @option.hostgroup@]\"/\"@option.hostgroup@]\"\\n@option.hostip@/\" /etc/ansible/hosts\
+        \ ###ADD HOST NO GRUPO QUE ELE PERTENCE\nfi"
+    - description: Execução da Playbook Wecorp
+      exec: ansible-playbook /etc/ansible/playbooks/wecorp.yml -e "dbname={$option.dbname} host=${option.hostip}"
+    - exec: /servicios/$option.dbname/tomcat-7.0.35/bin/startup.sh
+    keepgoing: false
+    strategy: node-first
+  uuid: a1040eb5-3cab-41d7-b8e0-8cd845d3e0c7
