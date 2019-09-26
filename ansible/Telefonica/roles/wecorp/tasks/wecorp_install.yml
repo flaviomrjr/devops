@@ -1,11 +1,11 @@
 - name: Copiando aplicação Wecorp
   copy:
-    src: "{{ dbname  }}.tar.bz2"
-    dest: "/tmp/{{ dbname }}.tar.bz2"
+    src: "{{ dbname  }}.tar.*"
+    dest: "/tmp/"
 
 - name: Descompacta a aplicação
   unarchive: 
-    src: "/tmp/{{ dbname }}.tar.bz2"
+    src: "/tmp/{{ dbname }}.tar.*"
     dest: /servicios
     remote_src: yes
 
@@ -17,7 +17,7 @@
 - name: Copiando server.xml 
   template:
     src: server.xml.j2
-    dest: "/servicios/{{ dbname }}/tomcat-7.0.35/conf/server.xml"
+    dest: "/servicios/{{ dbname }}/tomcat-7.0.*/conf/server.xml"
   
 - name: Copiando arquivo portal-ext.properties
   template:
@@ -27,15 +27,12 @@
 - name: Copiando arquivo catalina.sh
   copy:
     src: catalina.sh
-    dest: "/servicios/{{ dbname }}/tomcat-7.0.35/bin"
+    dest: "/servicios/{{ dbname }}/tomcat-7.0.*/bin"
 
 - name: Copiando arquivo setenv.sh
   copy:
     src: setenv.sh
-    dest: "/servicios/{{ dbname }}/tomcat-7.0.35/bin"
-
-- name: Inicia aplicação Wecorp
-  command: 'sh /servicios/{{ dbname }}/tomcat-7.0.35/bin/startup.sh'
+    dest: "/servicios/{{ dbname }}/tomcat-7.0.*/bin"
 
 - name: Limpando diretorio /TMP
   command: rm -rf /tmp/*
