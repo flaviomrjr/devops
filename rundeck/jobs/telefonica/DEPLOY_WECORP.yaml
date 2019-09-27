@@ -1,12 +1,20 @@
 - defaultTab: nodes
   description: "Job utilizado para criar um ambiente do Wecorp utilizando a aplicaç\
     ão definida.  \n\n## Parametros utilizados:  \n\nVocê deve definir os parametros\
-    \ a seguir para configurar a aplicação.  \nutilize todos os nomes com letras minusculas,\
-    \ nao use caracteres especiais e  \nnão use acentos.  \n\n**dbname:**  \n\nSera\
-    \ utilizado para criar o diretório e banco: **wecorp_nomedocliente**\n\n**hostgroup:**\n\
+    \ a seguir para realizar o deploy da aplicação.  \nUtilize todos os nomes com\
+    \ letras minusculas, nao use caracteres especiais e  \nnão use acentos. \n\n**dbname:**\
+    \  \n\nSera utilizado para criar o diretório e banco: **wecorp_nomedocliente**\n\
+    \n**dominio:**\n\nSerá utilizado para definir o dominio configurado no apache:\
+    \ **www.cliente.com.br**\n\n**file:**\n\nSerá utilizado para definir o tipo de\
+    \ extenção utilizada na compactação da aplicação: **bz2 ou gz**\n\n**hostgroup:**\n\
     \nSera utilizado para definir em qual grupo o host será adicionado no arquivo\
     \ de hosts do ansible: **dev**\n\n**hostip:**\n\nSerá utilizado para definir o\
-    \ IP do host no arquivo de hosts do ansible: **192.168.0.10**"
+    \ IP do host no arquivo de hosts do ansible: **192.168.0.10**\n\n**tomcat**\n\n\
+    Será responsável em definir a versão do tomcat nos arquivos de configuração: **7.0.62**\n\
+    \n### INFORMAÇÕES COMPLEMENTARES\n\nITEM | DESCRICAO\n-----| ---------\n  1  |\
+    \ Altere a senha do usuário \"root\" - Senha atual \"Mudar123@\"\n  2  | Usuá\
+    rio MySQL para equipe de Dev - Usuário: devlogs Senha: Ted10gs\n  3  | Porta HTTP:\
+    \ 9160 - Porta AJP: 9161"
   executionEnabled: true
   id: a1040eb5-3cab-41d7-b8e0-8cd845d3e0c7
   loglevel: INFO
@@ -24,10 +32,22 @@
   options:
   - description: Nome da aplicação e DB
     name: dbname
+    required: true
+  - description: Variavel responsavel em definir o dominio da aplicação.
+    name: dominio
+    required: true
+  - description: Variavel responsavel para definir a extenção utilizada no arquivo da aplicação
+    name: file
+    required: true
   - description: Define em qual grupo de hosts o servidor será inserido
     name: hostgroup
+    required: true
   - description: Define o IP do host em que será executado
     name: hostip
+    required: true
+  - description: Define a versão do tomcat
+    name: tomcat
+    required: true
   scheduleEnabled: true
   sequence:
     commands:
@@ -41,9 +61,9 @@
         if [ $? -eq 0 ]; then\n\techo \"HostIP ja existe\" \nelse\n\tsed -i \"s/\"\
         @option.hostgroup@]\"/\"@option.hostgroup@]\"\\n@option.hostip@/\" /etc/ansible/hosts\
         \ ###ADD HOST NO GRUPO QUE ELE PERTENCE\nfi"
+    - exec: ansible-playbook /etc/ansible/playbooks/pymysql.yml -e "host=${option.hostip}"
     - description: Execução da Playbook Wecorp
-      exec: ansible-playbook /etc/ansible/playbooks/wecorp.yml -e "dbname={$option.dbname} host=${option.hostip}"
-    - exec: /servicios/{$option.dbname}/tomcat-7.0.35/bin/startup.sh
+      exec: ansible-playbook /etc/ansible/playbooks/wecorp.yml -e "dbname=${option.dbname} host=${option.hostip} dominio=${option.dominio} file=${option.file} tomcat=${option.tomcat}"
     keepgoing: false
     strategy: node-first
   uuid: a1040eb5-3cab-41d7-b8e0-8cd845d3e0c7
