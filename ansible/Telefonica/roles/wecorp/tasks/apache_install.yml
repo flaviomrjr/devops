@@ -6,9 +6,17 @@
   
 - name: Habilitando Dependencias do Apache
   command: "a2enmod {{ item }}"
-  notify: apacherestart
   loop:
   - proxy
   - rewrite
   - proxy_ajp
   - proxy_http
+
+- name: Copiando Template Apache
+  template: 
+    src: dominio.conf
+    dest: "/etc/apache2/sites-available/{{ dominio }}.conf"
+
+- name: Ativando WebHost
+  command: "a2ensite {{ dominio }}.conf"
+  notify: apacherestart

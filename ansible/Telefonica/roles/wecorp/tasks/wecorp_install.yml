@@ -1,11 +1,11 @@
 - name: Copiando aplicação Wecorp
   copy:
-    src: "{{ dbname  }}.tar.*"
+    src: "{{ dbname }}.tar.{{ file }}"
     dest: "/tmp/"
 
 - name: Descompacta a aplicação
   unarchive: 
-    src: "/tmp/{{ dbname }}.tar.*"
+    src: "/tmp/{{ dbname }}.tar.{{ file }}"
     dest: /servicios
     remote_src: yes
 
@@ -17,7 +17,7 @@
 - name: Copiando server.xml 
   template:
     src: server.xml.j2
-    dest: "/servicios/{{ dbname }}/tomcat-7.0.*/conf/server.xml"
+    dest: "/servicios/{{ dbname }}/tomcat-{{ tomcat }}/conf/server.xml"
   
 - name: Copiando arquivo portal-ext.properties
   template:
@@ -27,12 +27,28 @@
 - name: Copiando arquivo catalina.sh
   copy:
     src: catalina.sh
-    dest: "/servicios/{{ dbname }}/tomcat-7.0.*/bin"
+    dest: "/servicios/{{ dbname }}/tomcat-{{ tomcat }}/bin"
 
 - name: Copiando arquivo setenv.sh
   copy:
     src: setenv.sh
-    dest: "/servicios/{{ dbname }}/tomcat-7.0.*/bin"
+    dest: "/servicios/{{ dbname }}/tomcat-{{ tomcat }}/bin"
+
+- name: Criando diretorio logs
+  file:
+    path: "/servicios/{{ dbname }}/tomcat-{{ tomcat }}/logs"
+    owner: root
+    group: root
+    mode: '0775'
+    state: directory
+
+- name: Criando arquivo catalina.out
+  file:
+    path: "/servicios/{{ dbname }}/tomcat-{{ tomcat }}/logs/catalina.out"
+    owner: root
+    group: root
+    mode: '0775'
+    state: file
 
 - name: Limpando diretorio /TMP
   command: rm -rf /tmp/*

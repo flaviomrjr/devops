@@ -3,3 +3,5 @@
 - include: mysql_create_db.yml
 - include: java_install.yml
 - include: wecorp_install.yml
+- include: etherpad.yml
+- include: configure_backup.yml
