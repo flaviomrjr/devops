@@ -1,5 +1,5 @@
 #!/bin/bash
-USER="appserver"
+USER="appwecorp"
 PASSWORD="Wecorp99@"
 BACKUPDIR="/backup/dump"
 monitor="ERROR"
