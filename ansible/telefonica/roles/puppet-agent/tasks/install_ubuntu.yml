@@ -1,9 +1,23 @@
 - name: Instalando o repositorio Puppet - Ubuntu
   apt:
-    deb: /tmp/puppet6-release-bionic.deb
+    deb: "/tmp/puppet6-release-{{ansible_lsb.codename}}.deb"
 
 - name: Instalando o pacote Puppet Agent - Ubuntu
   apt:
     name: puppet-agent
     update_cache: yes
     state: present
+
+- name: Configura arquivo puppet.conf
+  template:
+    src: puppet.conf
+    dest: /etc/puppetlabs/puppet/puppet.conf
+  notify: restart
+  when: ansible_facts['distribution_major_version'] == "16" or ansible_facts['distribution_major_version'] == "18" or ansible_facts['os_family'] == "RedHat"
+
+- name: Configura arquivo puppet.conf Ubuntu14
+  template:
+    src: puppet.conf
+    dest: /etc/puppetlabs/puppet/puppet.conf
+  notify: restart14
+  when: ansible_facts['distribution_major_version'] == "14"

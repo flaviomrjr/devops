@@ -1,2 +1,10 @@
 ---
-# handlers file for puppet-agent
+- name: restart
+  systemd:
+    name: puppet
+    state: restarted
+
+- name: restart14
+  service:
+    name: puppet
+    state: restarted

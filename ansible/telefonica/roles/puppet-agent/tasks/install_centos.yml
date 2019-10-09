@@ -7,3 +7,9 @@
   yum:
     name: puppet-agent
     state: present
+
+- name: Configura arquivo puppet.conf
+  template:
+    src: puppet.conf
+    dest: /etc/puppetlabs/puppet/puppet.conf
+  notify: restart 
