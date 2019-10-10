@@ -20,3 +20,8 @@
 - name: Ativando WebHost
   command: "a2ensite {{ dominio }}.conf"
   notify: apacherestart
+  when: ansible_facts['distribution_major_version'] == "16" or ansible_facts['distribution_major_version'] == "18" or ansible_facts['os_family'] == "RedHat"
+
+- name: Ativando WebHost14
+  command: "a2ensite {{ dominio }}.conf"
+  notify: apacherestart14

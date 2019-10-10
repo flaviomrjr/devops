@@ -1,6 +1,6 @@
 - name: Instalando MySQL
   apt: 
-    name: ['mysql-client','mysql-server']
+    name: ['mysql-client-5.5','mysql-server-5.5']
     update_cache: yes
     state: present
 
@@ -14,6 +14,13 @@
   systemd:
     name: mysql
     state: started
+  when: ansible_facts['distribution_major_version'] == "16" or ansible_facts['distribution_major_version'] == "18" or ansible_facts['os_family'] == "RedHat"
+
+- name: Iniciando MySQL-14
+  service:
+    name: mysql
+    state: started
+  when: ansible_facts['distribution_major_version'] == "14"
 
 - name: Editando arquivos mysqld.cnf
   blockinfile: 
@@ -23,8 +30,27 @@
       lower_case_table_names = 1
       character-set-server=utf8
       collation-server=utf8_general_ci
+  when: ansible_facts['distribution_major_version'] == "16" or ansible_facts['distribution_major_version'] == "18" or ansible_facts['os_family'] == "RedHat"
+
+- name: Editando arquivos mysqld.cnf-14
+  blockinfile:
+    path: /etc/mysql/my.cnf
+    state: present
+    block: |
+      lower_case_table_names = 1
+      character-set-server=utf8
+      collation-server=utf8_general_ci
+  when: ansible_facts['distribution_major_version'] == "14"
 
 - name: Reinicia o MySQL
   systemd:
     name: mysql
     state: restarted
+  when: ansible_facts['distribution_major_version'] == "16" or ansible_facts['distribution_major_version'] == "18" or ansible_facts['os_family'] == "RedHat"
+
+- name: Reinicia o MySQL-14
+  service:
+    name: mysql
+    state: restarted
+  when: ansible_facts['distribution_major_version'] == "14"
+  

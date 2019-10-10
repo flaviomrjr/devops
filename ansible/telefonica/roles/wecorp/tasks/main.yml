@@ -4,4 +4,5 @@
 - include: java_install.yml
 - include: wecorp_install.yml
 - include: etherpad.yml
+  when: ansible_facts['distribution_major_version'] == "16" or ansible_facts['distribution_major_version'] == "18" or ansible_facts['os_family'] == "RedHat"
 - include: configure_backup.yml
