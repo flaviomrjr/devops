@@ -1,0 +1,18 @@
+---
+# tasks file for win_zabbix-agent---
+- name: Instala Zabbix Agent
+  win_chocolatey:
+    name: zabbix-agent
+    state: present
+
+- name: Copia arquivo zabbix_agentd.conf
+  win_template:
+    src: zabbix_agentd.conf
+    dest: C:\ProgramData\zabbix\zabbix_agentd.conf
+
+- name: Reinicia Zabbix Agent Service
+  win_service:
+    name: Zabbix Agent
+    state: restarted
+    
+     

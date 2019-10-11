@@ -1,0 +1,16 @@
+- name: Instalando o repositorio Zabbix - CentOS
+  yum:
+    name: "/tmp/repo.rpm"
+    state: present
+
+- name: Instalando o pacote Zabbix Agent - CentOS
+  yum:
+    name: zabbix-agent
+    state: present
+
+- name: Configura arquivo zabbix.conf
+  template:
+    src: zabbix_agentd.conf
+    dest: /etc/zabbix/zabbix_agentd.conf
+  notify: restart
+

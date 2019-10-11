@@ -1,0 +1,10 @@
+---
+# tasks file for puppet
+
+#- include: python.yml
+#  when: ansible_facts['distribution_major_version'] == "14"
+- include: prerequisitos.yml
+- include: install_centos.yml
+  when: ansible_distribution == "CentOS"
+- include: install_ubuntu.yml
+  when: ansible_distribution == "Ubuntu" 

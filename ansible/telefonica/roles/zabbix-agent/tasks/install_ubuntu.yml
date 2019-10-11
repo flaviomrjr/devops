@@ -1,0 +1,23 @@
+- name: Instalando o repositorio Zabbix - Ubuntu
+  apt:
+    deb: "/tmp/repo.deb"
+
+- name: Instalando o pacote Zabbix Agent - Ubuntu
+  apt:
+    name: zabbix-agent
+    update_cache: yes
+    state: present
+
+- name: Configura arquivo zabbix.conf
+  template:
+    src: zabbix_agentd.conf
+    dest: /etc/zabbix/zabbix_agentd.conf
+  notify: restart
+  when: ansible_facts['distribution_major_version'] == "16" or ansible_facts['distribution_major_version'] == "18"
+
+- name: Configura arquivo zabbix.conf Ubuntu14
+  template:
+    src: zabbix_agentd.conf
+    dest: /etc/zabbix/zabbix_agentd.conf
+  notify: restart14
+  when: ansible_facts['distribution_major_version'] == "14"

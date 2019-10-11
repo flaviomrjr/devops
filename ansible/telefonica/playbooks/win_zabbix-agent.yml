@@ -1,0 +1,4 @@
+---
+- hosts: windows-server 
+  roles:
+    - win_zabbix-agent

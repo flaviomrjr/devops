@@ -1,0 +1,5 @@
+---
+- hosts: "{{ host }}"
+  remote_user: root
+  roles:
+    - zabbix-agent

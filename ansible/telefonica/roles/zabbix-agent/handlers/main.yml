@@ -1,0 +1,10 @@
+---
+- name: restart
+  systemd:
+    name: zabbix-agent
+    state: restarted
+
+- name: restart14
+  service:
+    name: zabbix-agent
+    state: restarted
