@@ -1,0 +1,55 @@
+version: '3'
+services:
+  mysql-zabbix:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+      - db_conf:/etc/mysql
+      - db_logs:/var/log/mysql
+    restart: always
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_bin
+    environment:
+      MYSQL_ROOT_PASSWORD: wodmkv6730
+      MYSQL_DATABASE: zabbix
+      MYSQL_USER: zabbix
+      MYSQL_PASSWORD: Wodmkv6730@
+  zabbix-server:
+    depends_on:
+      - mysql-zabbix
+    restart: always
+    image: zabbix/zabbix-server-mysql:centos-4.0-latest
+    volumes:
+      - zabbix_usr_lib:/usr/lib/zabbix
+      - zabbix_var_lib:/var/lib/zabbix
+      - zabbix_etc:/etc/zabbix
+      - zabbix_var_log:/var/log/zabbix
+    ports:
+      - "10052:10050"
+      - "10051:10051"
+    environment:
+      DB_SERVER_HOST: mysql-zabbix
+      MYSQL_USER: root
+      MYSQL_PASSWORD: wodmkv6730
+  zabbix-web-nginx-mysql:
+    depends_on:
+      - zabbix-server
+      - mysql-zabbix
+    restart: always
+    image: zabbix/zabbix-web-nginx-mysql:centos-4.0-latest
+    ports:
+      - "8090:80"
+    environment:
+      DB_SERVER_HOST: mysql-zabbix
+      MYSQL_USER: root
+      MYSQL_PASSWORD: wodmkv6730
+      ZBX_SERVER_HOST: zabbix-server
+      PHP_TZ: America/Sao_Paulo
+
+volumes:
+  db_data: {}
+  db_conf: {}
+  db_logs: {}
+  zabbix_usr_lib: {}
+  zabbix_var_lib: {}
+  zabbix_etc: {}
+  zabbix_var_log: {}
