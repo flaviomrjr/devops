@@ -1,6 +1,6 @@
 - name: Instalando MySQL
   apt: 
-    name: ['mysql-client-5.5','mysql-server-5.5']
+    name: ['mysql-client','mysql-server']
     update_cache: yes
     state: present
 

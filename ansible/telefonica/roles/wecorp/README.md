@@ -13,9 +13,6 @@ DEVOPS
 ROLE   |TASKS
 -------|---------
 wecorp | 7
-pymysql| 1
-apache | 1
-puppet | 1
 
 ### MANUAL DE INSTALAÇÃO DO WECORP
 

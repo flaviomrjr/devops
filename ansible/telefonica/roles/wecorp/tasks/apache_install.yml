@@ -25,3 +25,4 @@
 - name: Ativando WebHost14
   command: "a2ensite {{ dominio }}.conf"
   notify: apacherestart14
+  when: ansible_facts['distribution_major_version'] == "14"
