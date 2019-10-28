@@ -1,0 +1,25 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: Mudar123@
+      MYSQL_DATABASE: liferay
+
+  liferay_ted:
+    depends_on:
+      - mysql
+    build: .
+    ports:
+      - 80:8080
+    restart: always
+    command: tail -f /servicios/liferay7/tomcat-9.0.17/logs/catalina.out 
+
+volumes:
+  db_data: {}
