@@ -12,14 +12,14 @@ services:
       MYSQL_ROOT_PASSWORD: Mudar123@
       MYSQL_DATABASE: liferay
 
-  liferay_ted:
+  liferay_ubuntu:
     depends_on:
       - mysql
     build: .
     ports:
       - 80:8080
     restart: always
-    command: tail -f /servicios/liferay7/tomcat-9.0.17/logs/catalina.out 
+    command: /servicios/liferay7/tomcat-9.0.17/bin/./startup.sh ; tail -f /servicios/liferay7/tomcat-9.0.17/logs/catalina.out 
 
 volumes:
   db_data: {}
