@@ -1,0 +1,28 @@
+version: '3'
+services:
+  wecorp-mysql:
+    build: ./mysql/
+    ports:
+      - 3307:3306
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: Mudar123@
+      MYSQL_USER: wecorp
+      MYSQL_PASSWORD: wecorp123@
+      MYSQL_DATABASE: wecorp5
+
+  wecorp-ubuntu:
+    depends_on:
+      - wecorp-mysql
+    build: ./wecorp/
+    ports:
+      - 8101:8101
+      - 8102:8102  
+    restart: always
+    command: /servicios/wecorp5/tomcat-7.0.35/bin/./startup.sh ; tail -f /servicios/wecorp5/tomcat-7.0.35/logs/catalina.out 
+
+volumes:
+  db_data: {}
