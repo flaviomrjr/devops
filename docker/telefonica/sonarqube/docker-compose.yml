@@ -1,0 +1,35 @@
+version: '3'
+services:
+  pg-sonarqube:
+    image: postgres:latest
+    volumes:
+      - db_data:/var/lib/postgresql
+    restart: always
+    environment:
+      POSTGRES_DB: sonar
+      POSTGRES_USER: tedsonar
+      POSTGRES_PASSWORD: SecquBe99@
+  sonarqube:
+    depends_on:
+      - pg-sonarqube
+    image: sonarqube
+    volumes:
+      - sonarqube_conf:/opt/sonarqube/conf
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
+      - sonarqube_data:/opt/sonarqube/data
+    restart: always
+    ports:
+      - 9002:9000
+    environment:
+      sonar.jdbc.username: tedsonar
+      sonar.jdbc.password: SecquBe99@
+      sonar.jdbc.url: jdbc:postgresql://pg-sonarqube/sonar
+
+volumes:
+  db_data: {}
+  sonarqube_conf: {}
+  sonarqube_extensions: {}
+  sonarqube_logs: {}
+  sonarqube_data: {}
+      
