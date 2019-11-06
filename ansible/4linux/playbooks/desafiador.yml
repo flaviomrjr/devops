@@ -1,0 +1,63 @@
+---
+- name: Playbook do desafiador
+  hosts: "{{ maquinas }}"
+  vars:
+    - usuario: aquaman
+  tasks:
+  - name: Executanto um comando
+    command: whoami
+    register: resultado
+
+  - name: Visualizando Comando
+    debug:
+      var: resultado.stdout
+
+  - name: Instalando Pacotes - Ubuntu
+    apt:
+      name: ['cowsay','sl','fish']
+      state: present
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Instalando EPEL-Release
+    yum:
+      name: epel-release
+      state: present
+    when: ansible_distribution == "CentOS"
+
+  - name: Instalando Pacotes - SUSE
+    zypper:
+      name: ['cowsay','bc']
+      state: present
+    when: ansible_distribution == "openSUSE Tumbleweed"
+
+  - name: Configurando o PATH
+    blockinfile:
+      path: /etc/profile
+      state: present
+      block: |
+        export PATH=$PATH:/usr/games
+
+  - name: Criando Usuário
+    user: 
+      name: "{{ usuario }}"
+      shell: /usr/bin/fish create_home=yes
+    when: ansible_os_family == "Debian"
+
+  - name: Liberar Ping no Brodcast
+    sysctl:
+      name: net.ipv4.icmp_echo_ignore_broadcasts
+      value: 0
+      state: present
+
+  - name: Regras Simpres - IPTABLES
+    iptables:
+      chain: OUTPUT
+      action: insert
+      protocol: icmp
+      destination: "{{ item }}"
+      jump: DROP
+    loop:
+    - 8.8.8.8
+    - 1.1.1.1
+    when: ansible_distribution != "openSUSE Tumbleweed"
