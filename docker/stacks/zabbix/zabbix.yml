@@ -1,0 +1,104 @@
+version: '3'
+services:
+  #ZABBIX MYSQL
+  mysql-zabbix:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+      - db_conf:/etc/mysql
+      - db_logs:/var/log/mysql
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_bin
+    environment:
+      MYSQL_ROOT_PASSWORD: wodmkv6730
+      MYSQL_DATABASE: zabbix
+      MYSQL_USER: zabbix
+      MYSQL_PASSWORD: Wodmkv6730@
+    networks:
+      - zabbix-server_net
+    deploy:
+      resources:
+        limits: 
+          memory: 4GB
+          cpus: '2'
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: on-failure      
+
+  #ZABBIX SERVER
+  zabbix-server:
+    depends_on:
+      - mysql-zabbix
+    image: zabbix/zabbix-server-mysql:centos-4.0-latest
+    volumes:
+      - zabbix_usr_lib:/usr/lib/zabbix
+      - zabbix_var_lib:/var/lib/zabbix
+      - zabbix_etc:/etc/zabbix
+      - zabbix_var_log:/var/log/zabbix
+    ports:
+      - 10052:10051
+    environment:
+      DB_SERVER_HOST: mysql-zabbix
+      MYSQL_USER: root
+      MYSQL_PASSWORD: wodmkv6730
+    networks:
+      - zabbix-server_net
+    deploy:
+      resources:
+        limits:
+          memory: 3GB
+          cpus: '2'
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+
+  #ZABBIX WEB
+  zabbix-web-nginx-mysql:
+    depends_on:
+      - zabbix-server
+      - mysql-zabbix
+    image: zabbix/zabbix-web-nginx-mysql:centos-4.0-latest
+    ports:
+      - "80:80"
+    environment:
+      DB_SERVER_HOST: mysql-zabbix
+      MYSQL_USER: root
+      MYSQL_PASSWORD: wodmkv6730
+      ZBX_SERVER_HOST: zabbix-server
+      PHP_TZ: America/Sao_Paulo
+    networks:
+      - zabbix-server_net
+    deploy:
+      resources:
+        limits:
+          memory: 2GB
+          cpus: '2'
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+ 
+networks:
+  zabbix-server_net:
+ 
+volumes:
+  db_data: {}
+  db_conf: {}
+  db_logs: {}
+  zabbix_usr_lib: {}
+  zabbix_var_lib: {}
+  zabbix_etc: {}
+  zabbix_var_log: {}
+
