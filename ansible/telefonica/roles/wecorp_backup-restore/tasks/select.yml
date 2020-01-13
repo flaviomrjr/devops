@@ -1,0 +1,11 @@
+- name: Consultando Backups Disponiveis
+  command: ls /backup/wecorp_rundeck
+  register: resultado
+  tags:
+  - select
+
+- name: Visualizando Backups Disponiveis
+  debug:
+    var: resultado.stdout_lines 
+  tags:
+  - select

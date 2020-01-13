@@ -1,0 +1,22 @@
+- name: Finalizando o Processo da Aplicacao
+  command: killall -9 java
+  tags:
+  - restore 
+
+- name: Restaurando Aplicacao
+  unarchive:
+    src: "/backup/wecorp_rundeck/bkp_{{ bkpdata }}/wecorp_{{ bkpdata }}.tar.bz2"
+    dest: /servicios/
+    remote_src: yes
+  tags:
+  - restore
+
+- name: Restaurando Database
+  mysql_db:
+    login_user: "root"
+    login_password: "Mudar123@"
+    name: wecorp
+    state: import
+    target: "/backup/wecorp_rundeck/bkp_{{ bkpdata }}/wecorp_{{ bkpdata }}.sql"
+  tags:
+  - restore

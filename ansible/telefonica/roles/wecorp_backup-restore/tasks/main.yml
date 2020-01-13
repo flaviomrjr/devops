@@ -1,0 +1,5 @@
+---
+# tasks file for wecorp_backup-restore
+- include: backup.yml
+- include: select.yml
+- include: restore.yml

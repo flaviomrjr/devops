@@ -1,0 +1,30 @@
+- name: Criando Diretorio de Backup
+  file:
+    path: "/backup/wecorp_rundeck/bkp_{{ansible_date_time.date}}"
+    owner: root
+    group: root
+    mode: '0775'
+    state: directory
+  tags:
+  - backup
+
+- name: Realizando Backup da Aplicacao
+  archive:
+    path: 
+    - /servicios/*
+    dest: "/backup/wecorp_rundeck/bkp_{{ansible_date_time.date}}/wecorp_{{ansible_date_time.date}}.tar.bz2"
+    format: bz2
+  tags:
+  - backup
+
+- name: Realizando Backup da Database
+  mysql_db:
+    login_user: "root"
+    login_password: "Mudar123@"
+    state: dump
+    name: wecorp
+    target: "/backup/wecorp_rundeck/bkp_{{ansible_date_time.date}}/wecorp_{{ansible_date_time.date}}.sql"
+  tags:
+  - backup
+ 
+

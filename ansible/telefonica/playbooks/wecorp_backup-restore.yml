@@ -1,0 +1,5 @@
+---
+- hosts: "{{ host }}"
+  remote_user: root
+  roles:
+    - wecorp_backup-restore
