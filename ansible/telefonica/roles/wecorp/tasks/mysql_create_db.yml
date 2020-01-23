@@ -5,7 +5,7 @@
 
 - name: Criando Base de Dados
   mysql_db:
-    name: "{{ dbname  }}"
+    name: "{{ dbname }}"
     state: present
     encoding: utf8
     login_unix_socket: "/var/run/mysqld/mysqld.sock"

@@ -42,7 +42,12 @@
     mode: '0775'
     state: directory
 
-- name: Criando arquivo catalina.out
+- name: Copiando arquivo catalina.out
+  copy:
+    src: catalina.out
+    dest: "/servicios/{{ dbname }}/tomcat-{{ tomcat }}/logs"
+
+- name: Aplicando permissoes catalina.out
   file:
     path: "/servicios/{{ dbname }}/tomcat-{{ tomcat }}/logs/catalina.out"
     owner: root

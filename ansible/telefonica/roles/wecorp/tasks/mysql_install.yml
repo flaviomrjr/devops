@@ -1,8 +1,16 @@
-- name: Instalando MySQL
+- name: Instalando MySQL U16/18
   apt: 
     name: ['mysql-client','mysql-server']
     update_cache: yes
     state: present
+  when: ansible_facts['distribution_major_version'] == "16" or ansible_facts['distribution_major_version'] == "18"
+
+- name: Instalando MySQL5.5 U14
+  apt:
+    name: ['mysql-client-5.5','mysql-server-5.5']
+    update_cache: yes
+    state: present
+  when: ansible_facts['distribution_major_version'] == "14"
 
 - name: Instalando Libreoffice
   apt:
@@ -10,45 +18,37 @@
     update_cache: yes
     state: present
   
-- name: Iniciando MySQL
+- name: Iniciando MySQL U16/18
   systemd:
     name: mysql
     state: started
-  when: ansible_facts['distribution_major_version'] == "16" or ansible_facts['distribution_major_version'] == "18" or ansible_facts['os_family'] == "RedHat"
+  when: ansible_facts['distribution_major_version'] == "16" or ansible_facts['distribution_major_version'] == "18"
 
-- name: Iniciando MySQL-14
+- name: Iniciando MySQL U14
   service:
     name: mysql
     state: started
   when: ansible_facts['distribution_major_version'] == "14"
 
-- name: Editando arquivos mysqld.cnf
-  blockinfile: 
-    path: /etc/mysql/mysql.conf.d/mysqld.cnf
-    state: present
-    block: | 
-      lower_case_table_names = 1
-      character-set-server=utf8
-      collation-server=utf8_general_ci
-  when: ansible_facts['distribution_major_version'] == "16" or ansible_facts['distribution_major_version'] == "18" or ansible_facts['os_family'] == "RedHat"
+- name: Editando arquivos mysqld.cnf U16/18
+  copy: 
+    src: mysqld.cnf
+    dest: "/etc/mysql/mysql.conf.d" 
+  when: ansible_facts['distribution_major_version'] == "16" or ansible_facts['distribution_major_version'] == "18"
 
-- name: Editando arquivos mysqld.cnf-14
-  blockinfile:
-    path: /etc/mysql/my.cnf
-    state: present
-    block: |
-      lower_case_table_names = 1
-      character-set-server=utf8
-      collation-server=utf8_general_ci
+- name: Copiando arquivo my.cnf U14
+  copy:
+    src: my.cnf
+    dest: "/etc/mysql"
   when: ansible_facts['distribution_major_version'] == "14"
 
-- name: Reinicia o MySQL
+- name: Reinicia o MySQL U16/18
   systemd:
     name: mysql
     state: restarted
-  when: ansible_facts['distribution_major_version'] == "16" or ansible_facts['distribution_major_version'] == "18" or ansible_facts['os_family'] == "RedHat"
+  when: ansible_facts['distribution_major_version'] == "16" or ansible_facts['distribution_major_version'] == "18"
 
-- name: Reinicia o MySQL-14
+- name: Reinicia o MySQL U14
   service:
     name: mysql
     state: restarted
