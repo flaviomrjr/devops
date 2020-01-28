@@ -34,7 +34,7 @@ services:
       - mysql-zabbix
     image: zabbix/zabbix-server-mysql:centos-4.0-latest
     volumes:
-      - zabbix_usr_lib:/usr/lib/zabbix
+      - zabbix_usr_lib:/usr/lib/zabbix/alertscripts
       - zabbix_var_lib:/var/lib/zabbix
       - zabbix_etc:/etc/zabbix
       - zabbix_var_log:/var/log/zabbix
@@ -66,8 +66,10 @@ services:
       - zabbix-server
       - mysql-zabbix
     image: zabbix/zabbix-web-nginx-mysql:centos-4.0-latest
+    volumes:
+      - ssl:/etc/ssl/nginx:ro 
     ports:
-      - "80:80"
+      - "443:443"
     environment:
       DB_SERVER_HOST: mysql-zabbix
       MYSQL_USER: root
@@ -101,4 +103,5 @@ volumes:
   zabbix_var_lib: {}
   zabbix_etc: {}
   zabbix_var_log: {}
+  ssl: {}
 
