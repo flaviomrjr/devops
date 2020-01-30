@@ -1,0 +1,35 @@
+version: '3'
+services:
+  registry:
+    image: registry:2
+    ports:
+      - 10443:10443
+    environment:
+      REGISTRY_HTTP_SECRET: "Tedhub99@"
+      REGISTRY_HTTP_ADDR: 0.0.0.0:10443
+      REGISTRY_HTTP_TLS_CERTIFICATE: /certs/ssl.crt
+      REGISTRY_HTTP_TLS_KEY: /certs/ssl.key
+      REGISTRY_AUTH: htpasswd
+      REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
+      REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
+    volumes:
+      - /registry/data:/var/lib/registry
+      - /registry/certs:/certs
+      - /registry/auth:/auth
+    networks:
+      - registry_net
+    deploy:
+      resources:
+        limits:
+          memory: 1GB
+          cpus: '2'
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: any
+
+networks:
+  registry_net:
