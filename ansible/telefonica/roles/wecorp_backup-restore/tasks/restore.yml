@@ -13,8 +13,8 @@
 
 - name: Restaurando Database
   mysql_db:
-    login_user: "root"
-    login_password: "Mudar123@"
+    login_user: "<user>"
+    login_password: "<password>"
     name: wecorp
     state: import
     target: "/backup/wecorp_rundeck/bkp_{{ bkpdata }}/wecorp_{{ bkpdata }}.sql"
