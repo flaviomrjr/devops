@@ -6,9 +6,9 @@ services:
       - db_data:/var/lib/postgresql
     restart: always
     environment:
-      POSTGRES_DB: sonar
-      POSTGRES_USER: tedsonar
-      POSTGRES_PASSWORD: SecquBe99@
+      POSTGRES_DB: <databses>
+      POSTGRES_USER: <user>
+      POSTGRES_PASSWORD: <password>
   sonarqube:
     depends_on:
       - pg-sonarqube
@@ -22,8 +22,8 @@ services:
     ports:
       - 9002:9000
     environment:
-      sonar.jdbc.username: tedsonar
-      sonar.jdbc.password: SecquBe99@
+      sonar.jdbc.username: <user>
+      sonar.jdbc.password: <password>
       sonar.jdbc.url: jdbc:postgresql://pg-sonarqube/sonar
 
 volumes:
