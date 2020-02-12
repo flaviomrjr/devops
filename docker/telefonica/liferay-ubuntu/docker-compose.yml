@@ -9,8 +9,8 @@ services:
     restart: always
     command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
     environment:
-      MYSQL_ROOT_PASSWORD: Mudar123@
-      MYSQL_DATABASE: liferay
+      MYSQL_ROOT_PASSWORD: <password>
+      MYSQL_DATABASE: <database>
 
   liferay_ubuntu:
     depends_on:
