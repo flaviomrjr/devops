@@ -9,10 +9,10 @@ services:
       - db_logs:/var/log/mysql
     command: mysqld --character-set-server=utf8 --collation-server=utf8_bin
     environment:
-      MYSQL_ROOT_PASSWORD: wodmkv6730
-      MYSQL_DATABASE: zabbix
-      MYSQL_USER: zabbix
-      MYSQL_PASSWORD: Wodmkv6730@
+      MYSQL_ROOT_PASSWORD: <password>
+      MYSQL_DATABASE: <database>
+      MYSQL_USER: <user>
+      MYSQL_PASSWORD: <password>
     networks:
       - zabbix-server_net
     deploy:
@@ -42,8 +42,8 @@ services:
       - 10052:10051
     environment:
       DB_SERVER_HOST: mysql-zabbix
-      MYSQL_USER: root
-      MYSQL_PASSWORD: wodmkv6730
+      MYSQL_USER: <user>
+      MYSQL_PASSWORD: <password>
     networks:
       - zabbix-server_net
     deploy:
@@ -72,8 +72,8 @@ services:
       - "443:443"
     environment:
       DB_SERVER_HOST: mysql-zabbix
-      MYSQL_USER: root
-      MYSQL_PASSWORD: wodmkv6730
+      MYSQL_USER: <user>
+      MYSQL_PASSWORD: <password>
       ZBX_SERVER_HOST: zabbix-server
       PHP_TZ: America/Sao_Paulo
     networks:
