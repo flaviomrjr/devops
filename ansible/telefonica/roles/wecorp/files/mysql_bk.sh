@@ -1,6 +1,6 @@
 #!/bin/bash
-USER="appwecorp"
-PASSWORD="Wecorp99@"
+USER="<user>"
+PASSWORD="<password>"
 BACKUPDIR="/backup/dump"
 monitor="ERROR"
 incio=$(date +'%Y-%m-%d %H:%M:%S')
