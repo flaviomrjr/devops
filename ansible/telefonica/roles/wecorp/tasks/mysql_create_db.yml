@@ -14,29 +14,29 @@
   mysql_user:
     host: "localhost"
     check_implicit_admin: yes
-    name: root
-    password: Mudar123@
+    name: <user>
+    password: '<password>'
     priv: "*.*:ALL,GRANT"
     state: present
     login_unix_socket: "/var/run/mysqld/mysqld.sock"
 
 - name: Criando Usuario MySQL para aplicação
   mysql_user:
-    login_user: "root"
-    login_password: "Mudar123@"
+    login_user: <user>
+    login_password: '<password>'
     host: 'localhost'
-    name: appwecorp
-    password: 'Wecorp99@'
+    name: <user>
+    password: '<password>'
     priv: '{{ dbname }}.*:ALL,GRANT'
     state: present
 
 - name: Criando Usuario MySQL para dev
   mysql_user:
-    login_user: "root"
-    login_password: "Mudar123@"
+    login_user: <user>
+    login_password: '<password>'
     host: '%'
-    name: devlogs
-    password: 'Ted10gs'
+    name: <user>
+    password: '<password>'
     priv: '{{ dbname }}.*:{{ item.permission }},GRANT'
     state: present
   when: "'{{ item.group }}' in group_names"
@@ -46,8 +46,8 @@
 
 - name: Importar arquivo SQL para o banco criado
   mysql_db:
-    login_user: "root"
-    login_password: "Mudar123@"
+    login_user: <user>
+    login_password: '<password>'
     name: "{{ dbname }}"
     state: import
     target: "/tmp/{{ dbname }}.sql"
