@@ -5,7 +5,7 @@ services:
     ports:
       - 10443:10443
     environment:
-      REGISTRY_HTTP_SECRET: "Tedhub99@"
+      REGISTRY_HTTP_SECRET: "<password>"
       REGISTRY_HTTP_ADDR: 0.0.0.0:10443
       REGISTRY_HTTP_TLS_CERTIFICATE: /certs/ssl.crt
       REGISTRY_HTTP_TLS_KEY: /certs/ssl.key
