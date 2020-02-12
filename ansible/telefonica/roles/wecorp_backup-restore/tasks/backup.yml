@@ -19,8 +19,8 @@
 
 - name: Realizando Backup da Database
   mysql_db:
-    login_user: "root"
-    login_password: "Mudar123@"
+    login_user: "<user>"
+    login_password: "<password>"
     state: dump
     name: wecorp
     target: "/backup/wecorp_rundeck/bkp_{{ansible_date_time.date}}/wecorp_{{ansible_date_time.date}}.sql"
