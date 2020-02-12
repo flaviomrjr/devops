@@ -30,7 +30,7 @@ services:
       - GRAYLOG_PASSWORD_SECRET=ZP4rKW3yLD6IxzyF03eOo7vquf6dF54TNz9GOVLRcj61GidnAsJcOIUZumv9yZTkLOBrvj0CZqCzSQycs7H6iFSMLHrLwI9U
       # Password: admin
       - GRAYLOG_ROOT_PASSWORD_SHA2=758cf786389f7476081330110f1999bf123f6d2243670fb612cf2ec6ef5800f8
-      - GRAYLOG_HTTP_EXTERNAL_URI=http://192.168.0.88:9001/
+      - GRAYLOG_HTTP_EXTERNAL_URI=http://<serverip>:9001/
     links:
       - mongodb:mongo
       - elasticsearch
