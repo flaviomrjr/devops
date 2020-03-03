@@ -1,6 +1,0 @@
--> systemctl stop mariadb
--> mysqld_safe --skip-grant-tables &
--> mysql
--> use mysql
--> select * from user;
--> UPDATE user SET Password=password('4linux') where User='root';

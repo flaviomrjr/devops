@@ -1,9 +1,0 @@
-Started by upstream project "[8mha:////4B170Mm6+a5tVbF9RDktnFjgc+Drg8AHITLYiz8MqsELAAAAmB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAy2EgYe/az8JH2X1IKc/Ep9ANFMbsTBAAAA[0mDeploy" build number [8mha:////4KWNgO9chwrxLOnKCgn2tg+/g/FZohmwPfWkXBzc3/y1AAAAmB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLQIwSBl79rPwkfZfUgpz8Sn1DAIT+Uc/CAAAA[0m1
-originally caused by:
- Started by upstream project "[8mha:////4HtloEwf7Y9SidoVxgvyfhUjhrZDwOQdAvhOgOHtbSLzAAAAoR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz+EgZR/az8JP2AovyyzOLM/LzE3NS8knx9AGSD4cbKAAAA[0mProvisionamento" build number [8mha:////4JC8yatkPN5jWlWN8UA9orDNUhzYwCx58vqq/RIq+BVBAAAAoR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLQIwSBjH9rPwk/YCi/LLM4sz8vMTc1LySfH1DAEVi19XLAAAA[0m1
- originally caused by:
-  Started by GitLab push by Administrator
-Running as SYSTEM
-Building in workspace /var/lib/jenkins/workspace/Monitoring
-URL: http://192.168.99.20/, response code: 200, status: UP
-Finished: SUCCESS

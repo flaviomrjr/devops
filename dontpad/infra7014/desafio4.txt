@@ -1,7 +1,0 @@
-Instalar o JENKINS pelo Rundeck
-
-1. Criar um Job chamado Jenkins
-2. Seguir as Instruções da Documentação para instalação da Versão LTS/STABLE e do Java 
-	https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions
-3. Criar um STEP para cada Passo
-4. Executar Apenas no Node Automation
