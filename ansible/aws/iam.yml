@@ -1,0 +1,35 @@
+---
+- name: Gerenciamento IAM - AWS
+  hosts: localhost
+  tasks:
+    - name: Criando Grupos
+      iam:
+        iam_type: group
+        name: "{{ item }}"
+        state: present
+      loop:
+      - analistas
+      - financeiro
+
+    - name: Criando Usuarios
+      iam:
+        iam_type: user
+        name: "{{ item.nome }}"
+        groups: "{{ item.grupo }}"
+        password: 4Linux99@
+        access_key_state: create
+        state: present
+      loop: 
+      - { nome: yoda, grupo: analistas }
+      - { nome: mace_windu, grupo: financeiro }
+
+    - name: Criando Politicas
+      iam_policy:
+        iam_type: group
+        iam_name: "{{ item.nome }}"
+        policy_name: "{{ item.politica }}"
+        policy_document: "{{ item.doc }}"
+        state: present
+      loop:
+      - { nome: analistas, politica: rules_analistas, doc: /etc/ansible/playbooks/analista.json }
+      - { nome: financeiro, politica: rules_financeiro, doc: /etc/ansible/playbooks/financeiro.json }  
