@@ -1,0 +1,104 @@
+#DEVE UTILIZAR O DOCKER
+image: docker:stable
+
+stages:
+- pre-build
+- build
+- test
+- deploy
+- notify
+
+build-docker:
+  services:
+  - docker:dind
+  retry: 2
+  before_script:
+  - docker info
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+
+  stage: pre-build
+  script:
+  - docker build -t minha-imagem .
+  - docker tag minha-imagem flaviomrjr/minha-imagem:latest
+  - docker push flaviomrjr/minha-imagem:latest
+
+build-project:
+  image: flaviomrjr/minha-imagem:latest
+  retry: 2
+  services:
+  - docker:dind
+  - mysql:5.7
+  variables:
+    MYSQL_USER: $DB_USER
+    MYSQL_PASSWORD: $DB_PASSWORD
+    MYSQL_DATABASE: $DB_DATABASE
+    MYSQL_ROOT_PASSWORD: $DB_ROOT_PASSWORD
+
+    DB_NAME: $DB_DATABASE
+    DB_USER: $DB_USER
+    DB_PASSWORD: $DB_PASSWORD
+    DB_PORT: '3306'
+    DB_HOST: 'mysql'
+    SECRET_KEY: $DB_SECRET_KEY
+
+  stage: build
+  tags:
+  - executor-tarefas
+  dependencies:
+  - build-docker
+  script:
+  - python manage.py makemigrations
+  - python manage.py migrate
+
+test-project:
+  image: flaviomrjr/minha-imagem:latest
+  stage: test
+  dependencies:
+  - build-project
+  tags:
+  - executor-tarefas
+  script:
+  - python -m unittest setUp
+  services:
+  - docker:dind
+  - mysql:5.7
+  variables:
+    MYSQL_USER: $DB_USER
+    MYSQL_PASSWORD: $DB_PASSWORD
+    MYSQL_DATABASE: $DB_DATABASE
+    MYSQL_ROOT_PASSWORD: $DB_ROOT_PASSWORD
+
+    DB_NAME: $DB_DATABASE
+    DB_USER: $DB_USER
+    DB_PASSWORD: $DB_PASSWORD
+    DB_PORT: '3306'
+    DB_HOST: 'mysql'
+    SECRET_KEY: $DB_SECRET_KEY
+
+deploy-project:
+  stage: deploy
+  tags:
+  - executor-deploy
+  dependencies:
+  - test-project
+  script:
+  - tar cfz arquivos.tgz *
+  - scp arquivos.tgz <server>@<ip>:/deploy/
+  - ssh <server>@<ip> 'cd /deploy/; tar xfz arquivos.tgz; /usr/local/bin/docker-compose up -d'
+
+notify-success:
+  stage: notify
+  tags:
+  - executor-deploy
+  when: on_success
+  script: 
+  - sh notifySuccess.sh
+
+notify-failure:
+  stage: notify
+  tags:
+  - executor-deploy
+  when: on_failure
+  script: 
+  - sh notifyFailure.sh
+
