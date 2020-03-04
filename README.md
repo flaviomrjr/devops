@@ -3,7 +3,7 @@ DEVOPS LABS
 
 DevOps Tools
 ------------
-**ansible/docker/jenkins/puppet/rundeck/terraform**
+**ansible/docker/jenkins/puppet/rundeck/terraform/git/gitlab-ci**
 
 As you know, we have got many DevOps tools so in this project you will find my DevOps labs with some tools to the infrastructure team.
 
