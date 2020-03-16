@@ -1,8 +1,8 @@
 ---
-- name: Playbook da Mulher Gato
+- name: Playbook Iron Man
   hosts: "{{ inventario }}"
   vars:
-    - username: hera_venenora 
+    - username: tony
   tasks:
   - name: Comando de teste
     command: uptime
@@ -13,18 +13,21 @@
       var: resultado.stdout
       #msg: mensagem 
 
-  - name: Instalando Pacotes Aleatorios
+  - name: Instalando Pacotes Aleatorios - Like Ubuntu
     apt:
-      name: nginx
+      name: ['sl','cowsay','nginx']
       update_cache: yes
       state: absent
     when: ansible_distribution == "Ubuntu"
 
-  - name: Instalando Pacotes Aleatorios - Like Red hat
+  - name: Instalando Pacotes Aleatorios - Like RedHat
     yum:
-      name: nginx
+      name: "{{ item }}"
       state: absent
-    when: ansible_distribution == "CentOS"
+    when: ansible_distribution == "RedHat"
+    loop:
+      - epel-release
+      - ['sl','cowsay','nginx']
 
   - name: Ajustando PATH
     lineinfile:
@@ -37,9 +40,9 @@
       path: /etc/hosts
       state: present
       block: |
-        192.168.99.10 devops.salas4linux.com.br devops
-        192.168.99.20 docker.salas4linux.com.br docker
-        192.168.99.30 automation.salas4linux.com.br automation   
+        192.168.99.10 devops.com.br devops
+        192.168.99.20 docker.com.br docker
+        192.168.99.30 automation.com.br automation   
   
   - name: Criando usuario
     user: name={{ username }} shell=/bin/bash create_home=yes
