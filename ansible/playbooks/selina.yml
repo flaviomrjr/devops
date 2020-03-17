@@ -15,7 +15,7 @@
 
   - name: Instalando Pacotes Aleatorios - Like Ubuntu
     apt:
-      name: ['sl','cowsay','nginx']
+      name: ['sl','cowsay']
       update_cache: yes
       state: absent
     when: ansible_distribution == "Ubuntu"
@@ -27,7 +27,7 @@
     when: ansible_distribution == "RedHat"
     loop:
       - epel-release
-      - ['sl','cowsay','nginx']
+      - ['sl','cowsay']
 
   - name: Ajustando PATH
     lineinfile:
