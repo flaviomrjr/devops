@@ -17,13 +17,13 @@
     apt:
       name: ['sl','cowsay']
       update_cache: yes
-      state: absent
+      state: present
     when: ansible_distribution == "Ubuntu"
 
   - name: Instalando Pacotes Aleatorios - Like RedHat
     yum:
       name: "{{ item }}"
-      state: absent
+      state: present
     when: ansible_distribution == "RedHat"
     loop:
       - epel-release
