@@ -1,0 +1,5 @@
+---
+- hosts: 192.168.0.10
+  remote_user: root
+  roles:
+    - bi-backup

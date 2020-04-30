@@ -1,0 +1,28 @@
+- name: Criando Diretorio de Backup
+  file:
+    path: "/backup_diario/moodle-{{ env }}/bkp_{{ansible_date_time.date}}"
+    owner: root
+    group: root
+    mode: '0775'
+    state: directory
+  tags:
+  - backup
+
+- name: Realizando Backup da Aplicacao
+  archive:
+    path: 
+    - "/opt/moodle-{{ env }}/app"
+    dest: "/backup_diario/moodle-{{ env }}/bkp_{{ansible_date_time.date}}/app_{{ansible_date_time.date}}.tar.bz2"
+    format: bz2
+  tags:
+  - backup
+
+- name: Realizando Backup do Bando de Dados
+  shell: "docker exec mariadb-{{ env }} /opt/bitnami/mariadb/bin/mysqldump -u root --password=TedMoodle2020# moodle-{{ env }} > /backup_diario/moodle-{{ env }}/bkp_{{ansible_date_time.date}}/moodle-{{ env }}_{{ansible_date_time.date}}.sql"
+  tags:
+  - backup
+
+- name: Excluindo Backups com Mais de 15 dias
+  shell: 'rm -rf /backup_diario/moodle-{{ env }}/bkp_$(date --date "15 day ago" +%Y-%m-%d)'
+  tags:
+  - backup

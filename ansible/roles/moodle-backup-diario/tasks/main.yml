@@ -1,0 +1,3 @@
+---
+# tasks file for moodle-backup-diario
+- include: backup.yml

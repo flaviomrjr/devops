@@ -1,0 +1,4 @@
+---
+# tasks file for bi-backup
+- include: set_facts.yml
+- include: backup.yml
