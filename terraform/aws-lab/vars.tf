@@ -9,7 +9,7 @@ variable "amis" {
 
 variable "cdirs_acesso_remoto" {
 	type = list
-	default = ["firstip/32","secondip/32"]
+	default = ["xx.xx.xx.xxx/32","xx.xx.xxx.x/32"]
 }
 
 variable "key_name" { 
